@@ -26,53 +26,39 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="nametxt" min="-2" pref="465" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="btnback" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="namelbl" min="-2" pref="61" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnsave" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="pricelbl" min="-2" pref="39" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="pricetxt" min="-2" pref="465" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="numberlbl" min="-2" pref="57" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="numbertxt" min="-2" pref="465" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="categorylbl" min="-2" pref="74" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="categorytxt" min="-2" pref="465" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="descriptionlbl" min="-2" pref="74" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
-                      <Component id="descriptiontxt" min="-2" pref="465" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="79" pref="79" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtname" min="-2" pref="465" max="-2" attributes="0"/>
+                                  <Component id="pricelbl" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="txtprice" min="-2" pref="465" max="-2" attributes="0"/>
+                                  <Component id="numberlbl" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="txtnumber" min="-2" pref="465" max="-2" attributes="0"/>
+                                  <Component id="categorylbl" min="-2" pref="74" max="-2" attributes="0"/>
+                                  <Component id="txtcategory" min="-2" pref="465" max="-2" attributes="0"/>
+                                  <Component id="descriptionlbl" min="-2" pref="74" max="-2" attributes="0"/>
+                                  <Component id="txtdescription" min="-2" pref="465" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
+                              <Component id="btnclear" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="169" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="btnback" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-              <Component id="namelbl" min="-2" pref="61" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnsave" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,24 +77,26 @@
                   </Group>
               </Group>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-              <Component id="nametxt" min="-2" max="-2" attributes="0"/>
+              <Component id="txtname" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Component id="pricelbl" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
-              <Component id="pricetxt" min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="txtprice" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace pref="27" max="32767" attributes="0"/>
               <Component id="numberlbl" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="numbertxt" min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="txtnumber" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="categorylbl" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="categorytxt" min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="txtcategory" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="descriptionlbl" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="descriptiontxt" min="-2" pref="29" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Component id="txtdescription" min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnclear" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -139,18 +127,18 @@
         <Property name="text" type="java.lang.String" value="Description"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nametxt">
+    <Component class="javax.swing.JTextField" name="txtname">
     </Component>
-    <Component class="javax.swing.JTextField" name="pricetxt">
+    <Component class="javax.swing.JTextField" name="txtprice">
     </Component>
-    <Component class="javax.swing.JTextField" name="numbertxt">
+    <Component class="javax.swing.JTextField" name="txtnumber">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="numbertxtActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtnumberActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="categorytxt">
+    <Component class="javax.swing.JTextField" name="txtcategory">
     </Component>
-    <Component class="javax.swing.JTextField" name="descriptiontxt">
+    <Component class="javax.swing.JTextField" name="txtdescription">
     </Component>
     <Component class="javax.swing.JButton" name="btnsave">
       <Properties>
@@ -176,6 +164,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbackActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnclear">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clear All"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnclearActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

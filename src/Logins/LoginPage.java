@@ -34,7 +34,7 @@ public class LoginPage extends javax.swing.JFrame {
      * Creates new form LogIn
      */
     public LoginPage() {
-         con = null;
+        con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
         user = "root";

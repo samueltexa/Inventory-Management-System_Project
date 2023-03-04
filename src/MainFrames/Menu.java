@@ -6,7 +6,7 @@
 package MainFrames;
 
 import Logins.LoginPage;
-import Products.Products;
+import Tables.Products_Table;
 
 /**
  *
@@ -74,8 +74,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void productmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productmenuActionPerformed
         // TODO add your handling code here:
-        Products products = new Products();
-        products.show();
+        Products_Table products_table = new Products_Table();
+        products_table.show();
         dispose();
         
     }//GEN-LAST:event_productmenuActionPerformed

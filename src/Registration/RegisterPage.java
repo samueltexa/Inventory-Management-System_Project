@@ -32,7 +32,7 @@ public class RegisterPage extends javax.swing.JFrame {
      * Creates new form LogIn
      */
     public RegisterPage() {
-         con = null;
+        con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
         user = "root";
@@ -40,8 +40,6 @@ public class RegisterPage extends javax.swing.JFrame {
         super.setTitle("Account");
         initComponents();
     }
-    public static Connection conn = null;
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -228,7 +226,7 @@ public class RegisterPage extends javax.swing.JFrame {
 
     private void btnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregisterActionPerformed
         
-       String s1 = txtusername.getText();
+        String s1 = txtusername.getText();
         String s2 = txtemail.getText();
         String s3 = txtmobile.getText();
         String s4 = txtpassword.getText();
