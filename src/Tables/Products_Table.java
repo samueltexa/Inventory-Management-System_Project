@@ -48,7 +48,7 @@ public class Products_Table extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
             st = con.createStatement();
-            query = "SELECT Name, Price, Number, Category, Description FROM product";
+            query = "SELECT Name, Price, Number, Category, Quantity, Supplier FROM product";
             rs = st.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
             int cols = rsmd.getColumnCount();
@@ -59,14 +59,15 @@ public class Products_Table extends javax.swing.JFrame {
             model = new DefaultTableModel();
             model.setColumnIdentifiers(colName); // setting the column headers
             table.setModel(model); // setting the table model on JTable
-            String Name, Price, Number, Category, Description;
+            String Name, Price, Number, Category, Quantity, Supplier;
             while (rs.next()){
                 Name = rs.getString(1);
                 Price = rs.getString(2);
                 Number = rs.getString(3);
                 Category = rs.getString(4);
-                Description = rs.getString(5);
-                String[] row = {Name, Price, Number, Category, Description};
+                Quantity = rs.getString(5);
+                Supplier = rs.getString(6);
+                String[] row = {Name, Price, Number, Category, Quantity, Supplier};
             model.addRow(row);
             }
             st.close();

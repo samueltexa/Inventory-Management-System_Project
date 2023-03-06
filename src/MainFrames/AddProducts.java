@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,6 +42,65 @@ public class AddProducts extends javax.swing.JFrame {
         user = "root";
         password = "";
         initComponents();
+        AddDataToSupplier();
+        AddDataToCategory();
+    }
+    public void AddDataToSupplier(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver"); //register the driver
+            con = DriverManager.getConnection(cs, user, password);
+            String query = "SELECT Name FROM suplier";
+            st = con.createStatement();           
+            statement = con.prepareStatement(query);
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                box1.addItem(rs.getString("Name"));   
+            }
+             box1.setSelectedItem(null);
+             txtsupplier.setText(null);
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            try {
+                con.close();
+                statement.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+    }
+    
+     public void AddDataToCategory(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver"); //register the driver
+            con = DriverManager.getConnection(cs, user, password);
+            String query = "SELECT Category FROM product_category";
+            st = con.createStatement();           
+            statement = con.prepareStatement(query);
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                box2.addItem(rs.getString("Category"));   
+            }
+             box2.setSelectedItem(null);
+             txtcategory.setText(null);
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            try {
+                con.close();
+                statement.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
     }
 
     /**
@@ -54,16 +115,20 @@ public class AddProducts extends javax.swing.JFrame {
         namelbl = new javax.swing.JLabel();
         pricelbl = new javax.swing.JLabel();
         numberlbl = new javax.swing.JLabel();
-        categorylbl = new javax.swing.JLabel();
-        descriptionlbl = new javax.swing.JLabel();
+        lblquantity = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         txtprice = new javax.swing.JTextField();
         txtnumber = new javax.swing.JTextField();
-        txtcategory = new javax.swing.JTextField();
-        txtdescription = new javax.swing.JTextField();
+        txtquantity = new javax.swing.JTextField();
         btnsave = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
         btnclear = new javax.swing.JButton();
+        lbldistrict = new javax.swing.JLabel();
+        box1 = new javax.swing.JComboBox<>();
+        txtsupplier = new javax.swing.JTextField();
+        lblcategory = new javax.swing.JLabel();
+        txtcategory = new javax.swing.JTextField();
+        box2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add New Products");
@@ -74,9 +139,7 @@ public class AddProducts extends javax.swing.JFrame {
 
         numberlbl.setText("Number");
 
-        categorylbl.setText("Category");
-
-        descriptionlbl.setText("Description");
+        lblquantity.setText("Quantity");
 
         txtnumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +172,24 @@ public class AddProducts extends javax.swing.JFrame {
             }
         });
 
+        lbldistrict.setText("Supplier");
+
+        box1.setToolTipText("Select Your Didtrict");
+        box1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box1ActionPerformed(evt);
+            }
+        });
+
+        lblcategory.setText("Category");
+
+        box2.setToolTipText("Select Your Didtrict");
+        box2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,23 +204,33 @@ public class AddProducts extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnsave))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pricelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(numberlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(79, 79, 79)
+                                .addComponent(lblquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(box2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(btnclear))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 79, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbldistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pricelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numberlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(categorylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(descriptionlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtdescription, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(225, 225, 225)
-                                .addComponent(btnclear)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(txtname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtprice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtnumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtquantity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtsupplier)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(box1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -157,21 +248,29 @@ public class AddProducts extends javax.swing.JFrame {
                 .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pricelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(numberlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(categorylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(descriptionlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtdescription, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(box2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(lbldistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(box1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(txtsupplier))
+                .addGap(27, 27, 27)
                 .addComponent(btnclear)
                 .addGap(5, 5, 5))
         );
@@ -189,7 +288,8 @@ public class AddProducts extends javax.swing.JFrame {
         String s2 = txtprice.getText();
         String s3 = txtnumber.getText();
         String s4 = txtcategory.getText();
-        String s5 = txtdescription.getText();
+        String s5 = txtquantity.getText();
+        String s6 = txtsupplier.getText();
         try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -201,14 +301,15 @@ public class AddProducts extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Product name already exists");
                 }
                 else{
-                    query = "INSERT INTO product(Name, Price, Number, Category, Description) VALUES('" + s1 + "','" + s2 +"','" + s3 +"','" + s4 +"','" + s5 +"')";
+                    query = "INSERT INTO product(Name, Price, Number, Category, Quantity, Supplier) VALUES('" + s1 + "','" + s2 +"','" + s3 +"','" + s4 +"','" + s5 +"', '" + s6 +"')";
                     st.executeUpdate(query);// savings
                     JOptionPane.showMessageDialog(null, "Product saved Successfully");
                     txtname.setText("");//make empty
                     txtprice.setText("");//make empty
                     txtnumber.setText("");//make empty
                     txtcategory.setText("");//make empty
-                    txtdescription.setText("");//make empty
+                    txtquantity.setText("");//make empty
+                     txtsupplier.setText("");//make empty
                     //set focus to txtname
                     txtname.requestFocus();
                 }
@@ -246,10 +347,22 @@ public class AddProducts extends javax.swing.JFrame {
         txtprice.setText("");//make empty
         txtnumber.setText("");//make empty
         txtcategory.setText("");//make empty
-        txtdescription.setText("");//make empty
+        txtquantity.setText("");//make empty
+        txtsupplier.setText("");//make empty
         //set focus to txtname
         txtname.requestFocus();
     }//GEN-LAST:event_btnclearActionPerformed
+
+    private void box1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box1ActionPerformed
+        // TODO add your handling code here:
+        txtsupplier.setText((String) box1.getSelectedItem());
+
+    }//GEN-LAST:event_box1ActionPerformed
+
+    private void box2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box2ActionPerformed
+        // TODO add your handling code here:
+         txtcategory.setText((String) box2.getSelectedItem());
+    }//GEN-LAST:event_box2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,18 +398,22 @@ public class AddProducts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> box1;
+    private javax.swing.JComboBox<String> box2;
     private javax.swing.JButton btnback;
     private javax.swing.JButton btnclear;
     private javax.swing.JButton btnsave;
-    private javax.swing.JLabel categorylbl;
-    private javax.swing.JLabel descriptionlbl;
+    private javax.swing.JLabel lblcategory;
+    private javax.swing.JLabel lbldistrict;
+    private javax.swing.JLabel lblquantity;
     private javax.swing.JLabel namelbl;
     private javax.swing.JLabel numberlbl;
     private javax.swing.JLabel pricelbl;
     private javax.swing.JTextField txtcategory;
-    private javax.swing.JTextField txtdescription;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtnumber;
     private javax.swing.JTextField txtprice;
+    private javax.swing.JTextField txtquantity;
+    private javax.swing.JTextField txtsupplier;
     // End of variables declaration//GEN-END:variables
 }

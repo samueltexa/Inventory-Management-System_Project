@@ -4,20 +4,56 @@
  * and open the template in the editor.
  */
 package MainFrames;
-
 import Logins.LoginPage;
+import Tables.Customer_Table;
 import Tables.Products_Table;
+import Tables.Sales_Table;
+import Tables.Supplier_Table;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author woola
  */
 public class Menu extends javax.swing.JFrame {
+    public static final String RESULT = "BSEINFORMATION.pdf";
+    Connection con;
+    PreparedStatement statement;
+    Statement st;
+    String cs;
+    String user;
+    String password;
+    String query;
+    ResultSet rs;
+    String records;
+    int count = 0;
 
     /**
      * Creates new form Menu
      */
     public Menu() {
+       con = null;
+        st = null;
+        cs = "jdbc:mysql://localhost:3306/inventorydatabase";
+        user = "root";
+        password = "";
         initComponents();
     }
 
@@ -32,16 +68,26 @@ public class Menu extends javax.swing.JFrame {
 
         btnlogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        order = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        storelbl = new javax.swing.JLabel();
+        storepiclbl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         taskpanel = new javax.swing.JMenuBar();
         Menumenu = new javax.swing.JMenu();
         productmenu = new javax.swing.JMenuItem();
+        customermenu = new javax.swing.JMenuItem();
+        suppliermenu = new javax.swing.JMenuItem();
+        salemenu = new javax.swing.JMenuItem();
+        reportmenu = new javax.swing.JMenu();
+        salesmenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnlogout.setBackground(java.awt.Color.red);
         btnlogout.setText("Logout");
+        btnlogout.setToolTipText("Click to log out");
         btnlogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlogoutActionPerformed(evt);
@@ -51,6 +97,31 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainFrames/Img2.jpeg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 240, 190));
+
+        order.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainFrames/Picture6.png"))); // NOI18N
+        order.setToolTipText("Click Here to Add,Delete,Update,Search Orders");
+        order.setMaximumSize(new java.awt.Dimension(128, 128));
+        order.setMinimumSize(new java.awt.Dimension(128, 128));
+        order.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderActionPerformed(evt);
+            }
+        });
+        getContentPane().add(order, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 150));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(java.awt.Color.green);
+        jLabel3.setText("Sales");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 50, -1));
+
+        storelbl.setBackground(java.awt.Color.red);
+        storelbl.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        storelbl.setForeground(java.awt.Color.green);
+        storelbl.setText("Store");
+        getContentPane().add(storelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 70, -1));
+
+        storepiclbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainFrames/Picture8.png"))); // NOI18N
+        getContentPane().add(storepiclbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 170, 150));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainFrames/img3.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 360));
@@ -65,7 +136,43 @@ public class Menu extends javax.swing.JFrame {
         });
         Menumenu.add(productmenu);
 
+        customermenu.setText("Customer List");
+        customermenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customermenuActionPerformed(evt);
+            }
+        });
+        Menumenu.add(customermenu);
+
+        suppliermenu.setText("Suppliers");
+        suppliermenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppliermenuActionPerformed(evt);
+            }
+        });
+        Menumenu.add(suppliermenu);
+
+        salemenu.setText("Sales");
+        salemenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salemenuActionPerformed(evt);
+            }
+        });
+        Menumenu.add(salemenu);
+
         taskpanel.add(Menumenu);
+
+        reportmenu.setText("Report");
+
+        salesmenu.setText("Sales Report");
+        salesmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesmenuActionPerformed(evt);
+            }
+        });
+        reportmenu.add(salesmenu);
+
+        taskpanel.add(reportmenu);
 
         setJMenuBar(taskpanel);
 
@@ -86,6 +193,112 @@ public class Menu extends javax.swing.JFrame {
         loginpage.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnlogoutActionPerformed
+
+    private void customermenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customermenuActionPerformed
+        // TODO add your handling code here:
+        Customer_Table customer_table = new Customer_Table();
+        customer_table.show();
+        dispose();
+    }//GEN-LAST:event_customermenuActionPerformed
+
+    private void suppliermenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliermenuActionPerformed
+        // TODO add your handling code here:
+        Supplier_Table supplier_table = new Supplier_Table();
+        supplier_table.show();
+        dispose();
+    }//GEN-LAST:event_suppliermenuActionPerformed
+
+    private void salemenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salemenuActionPerformed
+        // TODO add your handling code here:
+        Sales_Table sales_table = new Sales_Table();
+        sales_table.show();
+        dispose();
+    }//GEN-LAST:event_salemenuActionPerformed
+
+    private void orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderActionPerformed
+        // TODO add your handling code here:
+         Sales_Table sales_table = new Sales_Table();
+        sales_table.show();
+        dispose();
+    }//GEN-LAST:event_orderActionPerformed
+
+    private void salesmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesmenuActionPerformed
+        // TODO add your handling code here:
+        
+        
+       // void Main() throws FileNotFoundException, DocumentException, Exception{
+        // step 1
+        Document document = new Document(PageSize.A5.rotate());
+            try {
+                // step 2
+                PdfWriter.getInstance(document, new FileOutputStream(RESULT));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // step 3
+        document.open();
+        // step 4
+        PdfPTable table = new PdfPTable(4);
+           Connection con;
+    PreparedStatement statement;
+    Statement st;
+    String cs;
+    String user;
+    String password;
+    String query;
+    ResultSet rs;
+    String records;
+    int count = 0;
+         try{
+        con = null;
+        st = null;
+        cs = "jdbc:mysql://localhost:3306/inventorydatabase";
+        user = "root";
+        password = "";
+            Class.forName("com.mysql.jdbc.Driver"); //register the driver
+            con = DriverManager.getConnection(cs, user, password);
+            st = con.createStatement();
+            query = "select * from customer";//exwcute 
+             rs = st.executeQuery(query);
+            while(rs.next()){    
+                table.addCell(rs.getString("Name"));
+                table.addCell(rs.getString("Mobile"));
+                table.addCell(rs.getString("District"));
+                table.addCell(rs.getString("Address"));
+            }
+            document.add(table);
+         }
+            catch(ClassNotFoundException ex){
+                    ex.printStackTrace();
+                    
+            } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ////////open the file//////////
+        if(Desktop.isDesktopSupported()){
+        try{
+            File myfile = new File("BSEINFORMATION.pdf");
+            Desktop.getDesktop().open(myfile);
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+        
+        // step 5
+        document.close();
+        }
+    
+
+
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_salesmenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,9 +336,18 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Menumenu;
     private javax.swing.JButton btnlogout;
+    private javax.swing.JMenuItem customermenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton order;
     private javax.swing.JMenuItem productmenu;
+    private javax.swing.JMenu reportmenu;
+    private javax.swing.JMenuItem salemenu;
+    private javax.swing.JMenuItem salesmenu;
+    private javax.swing.JLabel storelbl;
+    private javax.swing.JLabel storepiclbl;
+    private javax.swing.JMenuItem suppliermenu;
     private javax.swing.JMenuBar taskpanel;
     // End of variables declaration//GEN-END:variables
 }
