@@ -33,16 +33,60 @@ import java.util.logging.Logger;
  * @author woola
  */
 public class Menu extends javax.swing.JFrame {
+
+    /**
+     *
+     */
     public static final String RESULT = "BSEINFORMATION.pdf";
+
+    /**
+     *
+     */
     Connection con;
+
+    /**
+     *
+     */
     PreparedStatement statement;
+
+    /**
+     *
+     */
     Statement st;
+
+    /**
+     *
+     */
     String cs;
+
+    /**
+     *
+     */
     String user;
+
+    /**
+     *
+     */
     String password;
+
+    /**
+     *
+     */
     String query;
+
+    /**
+     *
+     */
     ResultSet rs;
+
+    /**
+     *
+     */
     String records;
+
+    /**
+     *
+     */
     int count = 0;
 
     /**

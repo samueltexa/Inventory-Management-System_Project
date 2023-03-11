@@ -36,16 +36,11 @@
                   <Component id="lblprice" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="txtquantity" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="namelbl" min="-2" pref="94" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="box" min="-2" pref="89" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="box" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="namelbl" min="-2" pref="94" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbladdress" min="-2" pref="82" max="-2" attributes="0"/>
                           <Component id="box3" min="-2" pref="86" max="-2" attributes="0"/>
@@ -197,11 +192,16 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="namelbl" pref="23" max="32767" attributes="0"/>
-                          <Component id="lbladdress" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lbladdress" min="-2" pref="23" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="namelbl" min="-2" pref="23" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="box" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="box3" alignment="3" min="-2" max="-2" attributes="0"/>
