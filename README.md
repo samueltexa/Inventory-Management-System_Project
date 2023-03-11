@@ -1,2 +1,1 @@
-# inventory-management-system
-Simple inventory management system in java
+Simple 'inventory management system' application to test out the functionality of JDBC with MySQL as back-end. The project makes use of Data Access Object (DAO) design pattern to provide specific data operations and hide the details of the underlying database
