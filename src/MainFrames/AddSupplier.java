@@ -110,7 +110,7 @@ public final class AddSupplier extends javax.swing.JFrame {
              txtdistrict.setText(null);
             
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddSupplier.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             try {
@@ -118,9 +118,8 @@ public final class AddSupplier extends javax.swing.JFrame {
                 statement.close();
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AddSupplier.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
         }
     }
     

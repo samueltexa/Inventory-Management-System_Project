@@ -4,6 +4,7 @@
   and querying and modifying data in tables.
  */
 package Tables;
+import InternalFrames.DeleteProduct;
 import MainFrames.Menu;
 import MainFrames.AddProducts;
 import java.sql.Connection;
@@ -68,7 +69,7 @@ public class Products_Table extends javax.swing.JFrame {
      Constructs a new Products_Table object and initializes the user interface components.
      */
     public Products_Table() {
-         // Initializing the user interface components
+        // Initializing the user interface components
         con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
@@ -118,23 +119,17 @@ public class Products_Table extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
         btnaddnewproducts = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
         line = new javax.swing.JSeparator();
+        pane = new javax.swing.JDesktopPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        btndelete = new javax.swing.JButton();
+        btnedit = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(table);
 
         btnaddnewproducts.setBackground(new java.awt.Color(102, 255, 102));
         btnaddnewproducts.setFont(new java.awt.Font("Arial Black", 1, 11)); // NOI18N
@@ -148,6 +143,7 @@ public class Products_Table extends javax.swing.JFrame {
         });
 
         btnback.setText("Back");
+        btnback.setToolTipText("Backt o to menu");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbackActionPerformed(evt);
@@ -156,6 +152,75 @@ public class Products_Table extends javax.swing.JFrame {
 
         line.setBackground(java.awt.Color.blue);
         line.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(table);
+
+        btndelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btndelete.setForeground(java.awt.Color.red);
+        btndelete.setText("Delete");
+        btndelete.setToolTipText("click to go to the delete page");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
+
+        btnedit.setBackground(java.awt.Color.green);
+        btnedit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnedit.setText("Edit");
+
+        btnUpdate.setBackground(java.awt.Color.green);
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnUpdate.setText("Refresh");
+        btnUpdate.setToolTipText("click to refresh page");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        pane.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btndelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btnedit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btnUpdate, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout paneLayout = new javax.swing.GroupLayout(pane);
+        pane.setLayout(paneLayout);
+        paneLayout.setHorizontalGroup(
+            paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(paneLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnedit)
+                        .addGap(261, 261, 261)
+                        .addComponent(btnUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btndelete)
+                        .addGap(18, 18, 18))))
+        );
+        paneLayout.setVerticalGroup(
+            paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btndelete)
+                    .addComponent(btnedit)
+                    .addComponent(btnUpdate)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +231,7 @@ public class Products_Table extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnaddnewproducts))
             .addComponent(line, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addComponent(pane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +242,8 @@ public class Products_Table extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                .addComponent(pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -204,8 +270,35 @@ public class Products_Table extends javax.swing.JFrame {
         //calling the menu form:
         Menu menu = new Menu();
         menu.show();
+        //closing the current form
         dispose();
     }//GEN-LAST:event_btnbackActionPerformed
+    /**
+      Handles the event when the "delete" button is clicked.
+      <p>This method is called when the user clicks the "delete" button in the user interface.
+      It loads the form that displays the product to be deleted from the database.</p>
+      @param evt the ActionEvent object represent the event that will occur
+     */
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        // TODO add your handling code here:
+        pane.repaint();
+        //calling the Deleteproduct form
+        DeleteProduct deleteproduct = new DeleteProduct();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(deleteproduct).setVisible(true);
+    }//GEN-LAST:event_btndeleteActionPerformed
+ /**
+      Handles the event when the "update" button is clicked.
+      <p>This method is called when the user clicks the "update" button in the user interface.
+      It reloads the product table form.</p>
+      @param evt the ActionEvent object represent the event that will occur
+     */
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        Products_Table product_table = new Products_Table();
+        product_table.show();
+        dispose();
+    }//GEN-LAST:event_btnUpdateActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -239,10 +332,14 @@ public class Products_Table extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnaddnewproducts;
     private javax.swing.JButton btnback;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton btndelete;
+    private javax.swing.JButton btnedit;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator line;
+    private javax.swing.JDesktopPane pane;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

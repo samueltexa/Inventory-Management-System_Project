@@ -4,6 +4,7 @@
   and querying and modifying data in tables.
  */
 package Tables;
+import InternalFrames.DeleteCustomer;
 import MainFrames.AddCustomer;
 import MainFrames.Menu;
 import java.sql.Connection;
@@ -119,6 +120,10 @@ public class Customer_Table extends javax.swing.JFrame {
         line = new javax.swing.JSeparator();
         btnback = new javax.swing.JButton();
         btnaddnewcustomer = new javax.swing.JButton();
+        pane = new javax.swing.JDesktopPane();
+        btnedit = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         customertable = new javax.swing.JTable();
 
@@ -147,6 +152,30 @@ public class Customer_Table extends javax.swing.JFrame {
             }
         });
 
+        btnedit.setBackground(java.awt.Color.green);
+        btnedit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnedit.setText("Edit");
+
+        btnUpdate.setBackground(java.awt.Color.green);
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnUpdate.setText("Refresh");
+        btnUpdate.setToolTipText("click to refresh page");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btndelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btndelete.setForeground(java.awt.Color.red);
+        btndelete.setText("Delete");
+        btndelete.setToolTipText("click to go to the delete page");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
+
         customertable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -157,20 +186,49 @@ public class Customer_Table extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(customertable);
 
+        pane.setLayer(btnedit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btnUpdate, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btndelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout paneLayout = new javax.swing.GroupLayout(pane);
+        pane.setLayout(paneLayout);
+        paneLayout.setHorizontalGroup(
+            paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnedit)
+                .addGap(256, 256, 256)
+                .addComponent(btnUpdate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btndelete)
+                .addGap(23, 23, 23))
+            .addComponent(jScrollPane1)
+        );
+        paneLayout.setVerticalGroup(
+            paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnedit)
+                    .addComponent(btndelete))
+                .addGap(17, 17, 17))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 539, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 509, Short.MAX_VALUE)
                 .addComponent(btnaddnewcustomer))
+            .addComponent(pane, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(line, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(line, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,16 +236,14 @@ public class Customer_Table extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnaddnewcustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(491, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(pane)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(36, 36, 36)
                     .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(487, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 41, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(462, Short.MAX_VALUE)))
         );
 
         pack();
@@ -218,6 +274,31 @@ public class Customer_Table extends javax.swing.JFrame {
         //closing the customer_table menu
         dispose();
     }//GEN-LAST:event_btnaddnewcustomerActionPerformed
+    /**
+      Handles the event when the "update" button is clicked.
+      <p>This method is called when the user clicks the "update" button in the user interface.
+      It reloads the product table form.</p>
+      @param evt the ActionEvent object represent the event that will occur
+     */
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+         //reloading the customer table
+        Customer_Table customer_table = new Customer_Table();
+        customer_table.show();
+        dispose();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+    /**
+      Handles the event when the "delete" button is clicked.
+      <p>This method is called when the user clicks the "delete" button in the user interface.
+      It loads the form that displays the product to be deleted from the database.</p>
+      @param evt the ActionEvent object represent the event that will occur
+     */
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        pane.repaint();
+        //calling the Deleteproduct form
+        DeleteCustomer deletecustomer = new DeleteCustomer();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(deletecustomer).setVisible(true);
+    }//GEN-LAST:event_btndeleteActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -250,12 +331,15 @@ public class Customer_Table extends javax.swing.JFrame {
             new Customer_Table().setVisible(true);
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnaddnewcustomer;
     private javax.swing.JButton btnback;
+    private javax.swing.JButton btndelete;
+    private javax.swing.JButton btnedit;
     private javax.swing.JTable customertable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator line;
+    private javax.swing.JDesktopPane pane;
     // End of variables declaration//GEN-END:variables
 }

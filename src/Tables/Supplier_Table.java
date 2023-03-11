@@ -4,6 +4,7 @@
   and querying and modifying data in tables.
  */
 package Tables;
+import InternalFrames.DeleteSupplier;
 import MainFrames.AddSupplier;
 import MainFrames.Menu;
 import java.sql.Connection;
@@ -120,6 +121,10 @@ public class Supplier_Table extends javax.swing.JFrame {
         btnback = new javax.swing.JButton();
         btnaddnewproducts = new javax.swing.JButton();
         line = new javax.swing.JSeparator();
+        pane = new javax.swing.JDesktopPane();
+        btnedit = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         suppliertable = new javax.swing.JTable();
 
@@ -127,6 +132,7 @@ public class Supplier_Table extends javax.swing.JFrame {
         setTitle("Supplier List");
 
         btnback.setText("Back");
+        btnback.setToolTipText("back to menu");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbackActionPerformed(evt);
@@ -136,7 +142,7 @@ public class Supplier_Table extends javax.swing.JFrame {
         btnaddnewproducts.setBackground(new java.awt.Color(102, 255, 102));
         btnaddnewproducts.setFont(new java.awt.Font("Arial Black", 1, 11)); // NOI18N
         btnaddnewproducts.setForeground(new java.awt.Color(255, 255, 255));
-        btnaddnewproducts.setText("Add New Products");
+        btnaddnewproducts.setText("Add New Suppliers");
         btnaddnewproducts.setToolTipText("click to  add new products");
         btnaddnewproducts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +152,30 @@ public class Supplier_Table extends javax.swing.JFrame {
 
         line.setBackground(java.awt.Color.blue);
         line.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        btnedit.setBackground(java.awt.Color.green);
+        btnedit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnedit.setText("Edit");
+
+        btnUpdate.setBackground(java.awt.Color.green);
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnUpdate.setText("Refresh");
+        btnUpdate.setToolTipText("click to refresh page");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btndelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btndelete.setForeground(java.awt.Color.red);
+        btndelete.setText("Delete");
+        btndelete.setToolTipText("click to go to the delete page");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
 
         suppliertable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,6 +187,40 @@ public class Supplier_Table extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(suppliertable);
 
+        pane.setLayer(btnedit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btnUpdate, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btndelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout paneLayout = new javax.swing.GroupLayout(pane);
+        pane.setLayout(paneLayout);
+        paneLayout.setHorizontalGroup(
+            paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(btnedit)
+                .addGap(222, 222, 222)
+                .addComponent(btnUpdate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btndelete)
+                .addContainerGap())
+            .addGroup(paneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1))
+        );
+        paneLayout.setVerticalGroup(
+            paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btndelete)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnedit))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,8 +229,10 @@ public class Supplier_Table extends javax.swing.JFrame {
                 .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnaddnewproducts))
-            .addComponent(line, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addComponent(line, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pane)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +243,8 @@ public class Supplier_Table extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(line, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
+                .addComponent(pane)
+                .addContainerGap())
         );
 
         pack();
@@ -206,6 +273,22 @@ public class Supplier_Table extends javax.swing.JFrame {
         addsupplier.show();
         dispose();
     }//GEN-LAST:event_btnaddnewproductsActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        Supplier_Table supplier_table = new Supplier_Table();
+        supplier_table.show();
+        dispose();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        // TODO add your handling code here:
+        pane.repaint();
+        //calling the Deleteproduct form
+        DeleteSupplier deletesupplier = new DeleteSupplier();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(deletesupplier).setVisible(true);
+    }//GEN-LAST:event_btndeleteActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -238,10 +321,14 @@ public class Supplier_Table extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnaddnewproducts;
     private javax.swing.JButton btnback;
+    private javax.swing.JButton btndelete;
+    private javax.swing.JButton btnedit;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator line;
+    private javax.swing.JDesktopPane pane;
     private javax.swing.JTable suppliertable;
     // End of variables declaration//GEN-END:variables
 }
