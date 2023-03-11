@@ -19,55 +19,47 @@ import java.sql.Statement;
   @author woola
  */
 public class LoginPage extends javax.swing.JFrame {
-     //Declaring Variables
-
     /**
-     *
+     Declaring connection Variable
      */
     Connection con;
 
     /**
-     *
+     Declaring Prepared statement Variable
      */
     PreparedStatement statement;
 
     /**
-     *
+     Declaring statement Variable
      */
     Statement st;
 
     /**
-     *
+     Declaring local host Variable
      */
     String cs;
 
     /**
-     *
+     Declaring connection user Variable
      */
     String user;
 
     /**
-     *
+     Declaring connection password Variable
      */
     String password;
 
     /**
-     *
+     Declaring MySQL query Variable
      */
     String query;
 
     /**
-     *
+     Declaring result Variable
      */
     ResultSet rs;
-
     /**
-     *
-     */
-    String records;
-
-    /**
-     *
+     Declaring count Variable
      */
     int count = 0;
     /**
@@ -83,12 +75,6 @@ public class LoginPage extends javax.swing.JFrame {
         super.setTitle("Account");
         initComponents();
     }
-
-    /**
-     *
-     */
-    public static Connection conn = null;
-
     /**
     @SuppressWarnings("unchecked")
     */

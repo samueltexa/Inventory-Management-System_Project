@@ -30,55 +30,47 @@ import java.util.logging.Logger;
     @author woola
      */
 public final class AddProducts extends javax.swing.JFrame {
-     //Declaring Variables
-
-    /**
-     *
+     /**
+     Declaring connection Variable
      */
     Connection con;
 
     /**
-     *
+     Declaring Prepared statement Variable
      */
     PreparedStatement statement;
 
     /**
-     *
+     Declaring statement Variable
      */
     Statement st;
 
     /**
-     *
+     Declaring local host Variable
      */
     String cs;
 
     /**
-     *
+     Declaring connection user Variable
      */
     String user;
 
     /**
-     *
+     Declaring connection password Variable
      */
     String password;
 
     /**
-     *
+     Declaring MySQL query Variable
      */
     String query;
 
     /**
-     *
+     Declaring result Variable
      */
     ResultSet rs;
-
     /**
-     *
-     */
-    String records;
-
-    /**
-     *
+     Declaring count Variable
      */
     int count = 0;
 
@@ -105,7 +97,7 @@ public final class AddProducts extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
-            String query = "SELECT Name FROM suplier";
+            query = "SELECT Name FROM suplier";
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
@@ -138,7 +130,7 @@ public final class AddProducts extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
-            String query = "SELECT Category FROM product_category";
+            query = "SELECT Category FROM product_category";
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
@@ -359,7 +351,7 @@ public final class AddProducts extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
             st = con.createStatement();           
-            String query = "SELECT * FROM product where Name = '" + s1 + "'";
+            query = "SELECT * FROM product where Name = '" + s1 + "'";
             ResultSet re1 = st.executeQuery(query);
             if(!s1.equals("") && !s2.equals("") && !s3.equals("") && !s4.equals("")){
                 if(re1.next()){

@@ -24,60 +24,44 @@ import javax.swing.table.DefaultTableModel;
   @author woola
  */
 public class Customer_Table extends javax.swing.JFrame {
-    //Declaring Variables
-
     /**
-     *
+     Declaring connection Variable
      */
     Connection con;
-
     /**
-     *
+     Declaring Prepared statement Variable
      */
     PreparedStatement statement;
-
     /**
-     *
+     Declaring statement Variable
      */
     Statement st;
-
     /**
-     *
+     Declaring local host Variable
      */
     String cs;
-
     /**
-     *
+     Declaring connection user Variable
      */
     String user;
-
     /**
-     *
+     Declaring connection password Variable
      */
     String password;
-
     /**
-     *
+     Declaring MySQL query Variable
      */
     String query;
-
     /**
-     *
+     Declaring result Variable
      */
     ResultSet rs;
-
     /**
-     *
-     */
-    String records;
-
-    /**
-     *
+     Declaring count Variable
      */
     int count = 0;
-
     /**
-     *
+     creating a DefaultTableModel object called model
      */
     DefaultTableModel model;
     /**
@@ -123,7 +107,6 @@ public class Customer_Table extends javax.swing.JFrame {
             Logger.getLogger(Products_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -235,7 +218,6 @@ public class Customer_Table extends javax.swing.JFrame {
         //closing the customer_table menu
         dispose();
     }//GEN-LAST:event_btnaddnewcustomerActionPerformed
-
     /**
      * @param args the command line arguments
      */

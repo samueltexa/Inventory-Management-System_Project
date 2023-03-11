@@ -26,60 +26,44 @@ import java.text.SimpleDateFormat;
   @author woola
  */
 public final class Sales_Table extends javax.swing.JFrame {
-    //Declaring Variables
-
-    /**
-     *
+     /**
+     creating an object of the class DateChooser
      */
     DateChooser datechooser = new DateChooser();
-
     /**
-     *
+     Declaring connection Variable
      */
     Connection con;
-
     /**
-     *
+     Declaring Prepared statement Variable
      */
     PreparedStatement statement;
-
     /**
-     *
+     Declaring statement Variable
      */
     Statement st;
-
     /**
-     *
+     Declaring local host Variable
      */
     String cs;
-
     /**
-     *
+     Declaring connection user Variable
      */
     String user;
-
     /**
-     *
+     Declaring connection password Variable
      */
     String password;
-
     /**
-     *
+     Declaring MySQL query Variable
      */
     String query;
-
     /**
-     *
+     Declaring result Variable
      */
     ResultSet rs;
-
     /**
-     *
-     */
-    String records;
-
-    /**
-     *
+     Declaring count Variable
      */
     int count = 0;
     /**
@@ -108,7 +92,7 @@ public final class Sales_Table extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
-            String query = "SELECT Name FROM customer";
+            query = "SELECT Name FROM customer";
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
@@ -140,7 +124,7 @@ public final class Sales_Table extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
-            String query = "SELECT Name FROM product";
+            query = "SELECT Name FROM product";
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
@@ -162,7 +146,6 @@ public final class Sales_Table extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
         }
     }
       /**
@@ -173,7 +156,7 @@ public final class Sales_Table extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
-            String query = "SELECT Price FROM product";
+            query = "SELECT Price FROM product";
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
@@ -195,7 +178,6 @@ public final class Sales_Table extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
         }
     }
       /**
@@ -206,7 +188,7 @@ public final class Sales_Table extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
-            String query = "SELECT Address FROM customer";
+            query = "SELECT Address FROM customer";
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
@@ -424,7 +406,7 @@ public final class Sales_Table extends javax.swing.JFrame {
         });
 
         lbltotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbltotal.setForeground(new java.awt.Color(0, 204, 204));
+        lbltotal.setForeground(new java.awt.Color(0, 0, 255));
         lbltotal.setText("Total Amount");
 
         lbldate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -631,7 +613,6 @@ public final class Sales_Table extends javax.swing.JFrame {
     private void boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxActionPerformed
          //seting the data in the comboBox to the name texField:
         txtname.setText((String) box.getSelectedItem());
-
     }//GEN-LAST:event_boxActionPerformed
 /**
   Handles the selection of an item in the JComboBox.

@@ -24,63 +24,46 @@ import javax.swing.table.DefaultTableModel;
   @author woola
  */
 public class Products_Table extends javax.swing.JFrame {
-     //Declaring Variables
-
-    /**
-     *
+   /**
+     Declaring connection Variable
      */
     Connection con;
-
     /**
-     *
+     Declaring Prepared statement Variable
      */
     PreparedStatement statement;
-
     /**
-     *
+     Declaring statement Variable
      */
     Statement st;
-
     /**
-     *
+     Declaring local host Variable
      */
     String cs;
-
     /**
-     *
+     Declaring connection user Variable
      */
     String user;
-
     /**
-     *
+     Declaring connection password Variable
      */
     String password;
-
     /**
-     *
+     Declaring MySQL query Variable
      */
     String query;
-
     /**
-     *
+     Declaring result Variable
      */
     ResultSet rs;
-
     /**
-     *
-     */
-    String records;
-
-    /**
-     *
+     Declaring count Variable
      */
     int count = 0;
-
     /**
-     *
+     creating a DefaultTableModel object called model
      */
     DefaultTableModel model;
-
     /**
      Constructs a new Products_Table object and initializes the user interface components.
      */
@@ -126,7 +109,6 @@ public class Products_Table extends javax.swing.JFrame {
             Logger.getLogger(Products_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,9 +205,7 @@ public class Products_Table extends javax.swing.JFrame {
         Menu menu = new Menu();
         menu.show();
         dispose();
-
     }//GEN-LAST:event_btnbackActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -258,7 +238,6 @@ public class Products_Table extends javax.swing.JFrame {
             new Products_Table().setVisible(true);
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaddnewproducts;
     private javax.swing.JButton btnback;

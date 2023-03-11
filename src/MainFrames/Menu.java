@@ -27,68 +27,51 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author woola
  */
 public class Menu extends javax.swing.JFrame {
-
     /**
-     *
+     Declaring the static final String variable RESULT and assigning it a value CUSTOMERINFORMATION
      */
-    public static final String RESULT = "BSEINFORMATION.pdf";
-
-    /**
-     *
+    public static final String RESULT = "CUSTOMERINFORMATION.pdf";
+     /**
+     Declaring connection Variable
      */
     Connection con;
-
     /**
-     *
+     Declaring Prepared statement Variable
      */
     PreparedStatement statement;
-
     /**
-     *
+     Declaring statement Variable
      */
     Statement st;
-
     /**
-     *
+     Declaring local host Variable
      */
     String cs;
-
     /**
-     *
+     Declaring connection user Variable
      */
     String user;
-
     /**
-     *
+     Declaring connection password Variable
      */
     String password;
-
     /**
-     *
+     Declaring MySQL query Variable
      */
     String query;
-
     /**
-     *
+     Declaring result Variable
      */
     ResultSet rs;
-
     /**
-     *
-     */
-    String records;
-
-    /**
-     *
+     Declaring count Variable
      */
     int count = 0;
-
     /**
      * Creates new form Menu
      */
@@ -100,7 +83,6 @@ public class Menu extends javax.swing.JFrame {
         password = "";
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -227,8 +209,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         Products_Table products_table = new Products_Table();
         products_table.show();
-        dispose();
-        
+        dispose();  
     }//GEN-LAST:event_productmenuActionPerformed
 
     private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
@@ -267,35 +248,20 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_orderActionPerformed
 
     private void salesmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesmenuActionPerformed
-        // TODO add your handling code here:
-        
-        
-       // void Main() throws FileNotFoundException, DocumentException, Exception{
         // step 1
         Document document = new Document(PageSize.A5.rotate());
             try {
                 // step 2
                 PdfWriter.getInstance(document, new FileOutputStream(RESULT));
-            } catch (FileNotFoundException ex) {
+            } catch (FileNotFoundException | DocumentException ex) {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (DocumentException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
         // step 3
+        //opening  the document
         document.open();
         // step 4
         PdfPTable table = new PdfPTable(4);
-           Connection con;
-    PreparedStatement statement;
-    Statement st;
-    String cs;
-    String user;
-    String password;
-    String query;
-    ResultSet rs;
-    String records;
-    int count = 0;
-         try{
+        try{
         con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
@@ -315,35 +281,20 @@ public class Menu extends javax.swing.JFrame {
             document.add(table);
          }
             catch(ClassNotFoundException ex){
-                    ex.printStackTrace();
-                    
-            } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DocumentException ex) {
+            } catch (SQLException | DocumentException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ////////open the file//////////
+        //opening the file
         if(Desktop.isDesktopSupported()){
         try{
-            File myfile = new File("BSEINFORMATION.pdf");
+            File myfile = new File("CUSTOMERINFORMATION.pdf");
             Desktop.getDesktop().open(myfile);
         }catch(IOException ex){
-            ex.printStackTrace();
         }
-        
         // step 5
         document.close();
-        }
-    
-
-
-        
-        
-        
-        
-        
+        }  
     }//GEN-LAST:event_salesmenuActionPerformed
-
     /**
      * @param args the command line arguments
      */
