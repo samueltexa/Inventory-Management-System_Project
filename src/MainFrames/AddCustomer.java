@@ -1,7 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+The MainFrames package contains classes for creating and managing
+graphical user interface (GUI) windows in a Java application.
+The MainFrames package includes the following classes:
+{@link Menu form}: A class that represents a main application frame
+with a title, size, and optional menu bar.
+{@link AddSupplier form}: A class that represents a form for adding new suppliers to the database that can
+be opened from within a menu form.
+{@link AddCustomer form}: A class that represents a form for adding new customers to the database that can
+be opened from within a menu form.
+{@link AddProducts form}: A class that represents a form for adding new products to the database that can
+be opened from within a menu form.
  */
 package MainFrames;
 import Tables.Customer_Table;
@@ -16,26 +24,77 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author woola
+The AddCustomer class extends the javax.swing.JFrame class to provide
+a GUI window for adding a new customer to a database.
+The AddCustomer class includes the following components:
+A lblName for displaying the customer name field label.
+A txtMobile and lblMobile for entering and displaying the customer mobile number respectively.
+A lblDistrict for displaying the customer District field label.
+A txtAddress for entering the customer address.
+A btnSave for saving and  submitting the customer information.
+A btnClear for clearing all the text fields.
+The AddCustomer class also includes methods for setting and getting
+the customer name and address, as well as for submitting the customer information to a database.
+  @author woola
  */
-public class AddCustomer extends javax.swing.JFrame {
+public final class AddCustomer extends javax.swing.JFrame {
      //Declaring Variables
+
+    /**
+     *
+     */
     Connection con;
+
+    /**
+     *
+     */
     PreparedStatement statement;
+
+    /**
+     *
+     */
     Statement st;
+
+    /**
+     *
+     */
     String cs;
+
+    /**
+     *
+     */
     String user;
+
+    /**
+     *
+     */
     String password;
+
+    /**
+     *
+     */
     String query;
+
+    /**
+     *
+     */
     ResultSet rs;
+
+    /**
+     *
+     */
     String records;
+
+    /**
+     *
+     */
     int count = 0;
 
     /**
      * Creates new form AddProducts
      */
     public AddCustomer() {
+        // Initializing the user interface components
         con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
@@ -44,7 +103,12 @@ public class AddCustomer extends javax.swing.JFrame {
         initComponents();
         AddDataToComboBox();
     }
+
+    /**
+     *Iterating through the database and loading data from the location table into the comboBox 
+     */
     public void AddDataToComboBox(){
+        // Connect to the database and execute a query to add customers:
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -52,6 +116,7 @@ public class AddCustomer extends javax.swing.JFrame {
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
+             // Iterate over the result set and add items to the comboBox
             while(rs.next()){
                 box.addItem(rs.getString("Districts"));   
             }
@@ -207,9 +272,14 @@ public class AddCustomer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+         Handles the event when the "save" button is clicked.
+         <p>This method is called when the user clicks the "save" button in the user interface.
+         It saves and submits the customer data to the database once clicked.</p>
+         @param evt the ActionEvent object representing the event will occur
+       */
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
-         // TODO add your handling code here:
+         //declaring and iniatializing variables
         String s1 = txtname.getText();
         String s2 = txtmobile.getText();
         String s3 = txtdistrict.getText();
@@ -255,32 +325,41 @@ public class AddCustomer extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnsaveActionPerformed
-
+    /**
+      Handles the event when the "back" button is clicked.
+      <p>This method is called when the user clicks the "back" button in the user interface.
+      It returns the user to the Customer_List.</p>
+      @param evt the ActionEvent object representing the event will occur occurred
+     */
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
+         //calling the Customer_Table form
         Customer_Table customer_table = new Customer_Table();
         customer_table.show();
         dispose();
     }//GEN-LAST:event_btnbackActionPerformed
-
+    /**
+      Handles the event when the "clear" button is clicked.
+      <p>This method is called when the user clicks the "clear" button in the user interface.
+      It clears all the data in the text fields and sets focus to txtName.</p>
+      @param evt the ActionEvent object representing the event will occur occurred
+     */
     private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
-        // TODO add your handling code here:
+        // clearing the data in the text field
         txtname.setText("");//make empty
         txtmobile.setText("");//make empty
         txtdistrict.setText("");//make empty
         txtaddress.setText("");//make empty
-        //set focus to txtname
+        //seting focus to txtname
         txtname.requestFocus();
     }//GEN-LAST:event_btnclearActionPerformed
-
+/**
+  Handles the selection of an item in the JComboBox.
+  @param evt is the ActionEvent object that trigger this method
+ */
     private void boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxActionPerformed
-        // TODO add your handling code here:
+        //seting the data in the comboBox to the District texField:
         txtdistrict.setText((String) box.getSelectedItem());
-        
-        
-        
-        
-        
+            
     }//GEN-LAST:event_boxActionPerformed
 
     /**

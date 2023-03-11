@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+  The Tables package provides classes for creating and manipulating tables of data.
+  This includes classes for defining table structures, inserting and deleting rows and columns, 
+  and querying and modifying data in tables.
  */
 package Tables;
 
@@ -19,33 +19,82 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author woola
+ The Supplier_Table class represents a graphical user interface for displaying supplier data in a table format.
+  It extends the javax.swing.JFrame class to create a window for displaying the data.
+  This class includes methods for setting up the table, adding data to it, and updating the view.
+  <p>This class is designed to be used in conjunction with a database system that stores supplier data.</p>
+  @author woola
  */
 public class Supplier_Table extends javax.swing.JFrame {
      //Declaring Variables
+
+    /**
+     *
+     */
     Connection con;
+
+    /**
+     *
+     */
     PreparedStatement statement;
+
+    /**
+     *
+     */
     Statement st;
+
+    /**
+     *
+     */
     String cs;
+
+    /**
+     *
+     */
     String user;
+
+    /**
+     *
+     */
     String password;
+
+    /**
+     *
+     */
     String query;
+
+    /**
+     *
+     */
     ResultSet rs;
+
+    /**
+     *
+     */
     String records;
+
+    /**
+     *
+     */
     int count = 0;
+
+    /**
+     *
+     */
     DefaultTableModel model;
 
     /**
-     * Creates new form Supplier_Table
+     Constructs a new Supplier_Table object and initializes the user interface components.
      */
     public Supplier_Table() {
+         // Initializing the user interface components
          con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
         user = "root";
         password = "";
         initComponents();
+         // Connect to the database and execute a query to retrieve supplier data and display it into a table.
          try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -153,16 +202,26 @@ public class Supplier_Table extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+      Handles the event when the "back" button is clicked.
+      <p>This method is called when the user clicks the "back" button in the user interface.
+      It closes the supplier form and loads the menu form.</p>
+      @param evt the ActionEvent object represent the event that will occur
+     */
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
+       //calling the menu form.
         Menu menu = new Menu();
         menu.show();
         dispose();
     }//GEN-LAST:event_btnbackActionPerformed
-
+    /**
+      Handles the event when the "add New Supplier" button is clicked.
+      <p>This method is called when the user clicks the "add new supplier" button in the user interface.
+      It opens the addSupplier form once clicked.</p>
+      @param evt the ActionEvent object representing the event will occur
+     */
     private void btnaddnewproductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddnewproductsActionPerformed
-        // TODO add your handling code here:
+        //calling the addSupplier form.
         AddSupplier addsupplier = new AddSupplier();
         addsupplier.show();
         dispose();

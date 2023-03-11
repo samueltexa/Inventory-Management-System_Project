@@ -14,27 +14,79 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- *
- * @author woola
- */
-public class AddSupplier extends javax.swing.JFrame {
+    /**
+    The AddSupplier class extends the javax.swing.JFrame class to provide
+    a GUI window for adding a new supplier to a database.
+    The AddSupplier class includes the following components:
+    A lblName for displaying the supplier name field label.
+    A txtMobile and lblMobile for entering and displaying the supplier mobile number respectively.
+    A lblDistrict for displaying the supplier District field label.
+    A txtAddress for entering the product supplied by the supplier.
+    A btnSave for saving and  submitting the supplier information.
+    A btnClear for clearing all the text fields.
+    The AddSupplier class also includes methods for setting and getting
+    the supplier name and address, as well as for submitting the supplier
+    information to a database.
+     @author woola
+     */
+public final class AddSupplier extends javax.swing.JFrame {
     //Declaring Variables
+
+    /**
+     *
+     */
     Connection con;
+
+    /**
+     *
+     */
     PreparedStatement statement;
+
+    /**
+     *
+     */
     Statement st;
+
+    /**
+     *
+     */
     String cs;
+
+    /**
+     *
+     */
     String user;
+
+    /**
+     *
+     */
     String password;
+
+    /**
+     *
+     */
     String query;
+
+    /**
+     *
+     */
     ResultSet rs;
+
+    /**
+     *
+     */
     String records;
+
+    /**
+     *
+     */
     int count = 0;
 
     /**
      * Creates new form AddSupplier
      */
     public AddSupplier() {
+        // Initializing the user interface components:
         con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
@@ -46,7 +98,11 @@ public class AddSupplier extends javax.swing.JFrame {
         AddDataToCategory();
     }
     
+    /**
+      This method selects district name from the database and adds it to the district comboBox
+     */
     public void AddDataToDistrict(){
+        // Connect to the database and execute a query to add suppliers:
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -54,6 +110,7 @@ public class AddSupplier extends javax.swing.JFrame {
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
+             // Iterate over the result set and add items to the comboBox
             while(rs.next()){
                 box1.addItem(rs.getString("Districts"));   
             }
@@ -75,6 +132,9 @@ public class AddSupplier extends javax.swing.JFrame {
         }
     }
     
+    /**
+       This method selects product name from the database and adds it to the product comboBox
+     */
     public void AddDataToProduct(){
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
@@ -104,8 +164,10 @@ public class AddSupplier extends javax.swing.JFrame {
         }
     }
     
-    
-     public void AddDataToCategory(){
+    /**
+       This method selects product category from the database and adds it to the category comboBox
+     */
+    public void AddDataToCategory(){
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -309,16 +371,26 @@ public class AddSupplier extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+      Handles the event when the "back" button is clicked.
+      <p>This method is called when the user clicks the "back" button in the user interface.
+      It returns the user to the Supplier List.</p>
+      @param evt the ActionEvent object representing the event will occur occurred
+     */
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
+         //calling the Supplier_Table form
         Supplier_Table supplier_table = new Supplier_Table();
         supplier_table.show();
         dispose();
     }//GEN-LAST:event_btnbackActionPerformed
-
+  /**
+    Handles the event when the "save" button is clicked.
+    <p>This method is called when the user clicks the "save" button in the user interface.
+    It saves and submits the supplier data to the database once clicked.</p>
+    @param evt the ActionEvent object representing the event will occur
+  */
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
-        // TODO add your handling code here:
+        //declaring and iniatializing variables:
         String s1 = nametxt.getText();
         String s2 = mobiletxt.getText();
         String s3 = txtproduct.getText();
@@ -366,9 +438,14 @@ public class AddSupplier extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnsaveActionPerformed
-
+    /**
+      Handles the event when the "clear" button is clicked.
+      <p>This method is called when the user clicks the "clear" button in the user interface.
+      It clears all  the data in the text fields:.</p>
+      @param evt the ActionEvent object representing the event will occur occurred
+     */
     private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
-        // TODO add your handling code here:
+      //clearing all text fields:
         nametxt.setText("");//make empty
         mobiletxt.setText("");//make empty
         txtproduct.setText("");//make empty
@@ -377,21 +454,30 @@ public class AddSupplier extends javax.swing.JFrame {
         //set focus to txtname
         nametxt.requestFocus();
     }//GEN-LAST:event_btnclearActionPerformed
-
+/**
+  Handles the selection of an item in the JComboBox.
+  @param evt is the ActionEvent object that trigger this method
+ */
     private void box1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box1ActionPerformed
-        // TODO add your handling code here:
+        // sets the data selected from the comboBox to the district text field:
         txtdistrict.setText((String) box1.getSelectedItem());
 
     }//GEN-LAST:event_box1ActionPerformed
-
+/**
+  Handles the selection of an item in the JComboBox.
+  @param evt is the ActionEvent object that trigger this method
+ */
     private void box2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box2ActionPerformed
-        // TODO add your handling code here:
+        // setting the data selected from the comboBox to the product text field:
         txtproduct.setText((String) box2.getSelectedItem());
 
     }//GEN-LAST:event_box2ActionPerformed
-
+/**
+  Handles the selection of an item in the JComboBox.
+  @param evt is the ActionEvent object that trigger this method
+ */
     private void box3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box3ActionPerformed
-        // TODO add your handling code here:
+        //setting the data selected from the comboBox to the category text field:
         txtcategory.setText((String) box3.getSelectedItem());
     }//GEN-LAST:event_box3ActionPerformed
 

@@ -18,15 +18,55 @@ import java.sql.Statement;
  */
 public class RegisterPage extends javax.swing.JFrame {
      //Declaring Variables
+
+    /**
+     *
+     */
     Connection con;
+
+    /**
+     *
+     */
     PreparedStatement statement;
+
+    /**
+     *
+     */
     Statement st;
+
+    /**
+     *
+     */
     String cs;
+
+    /**
+     *
+     */
     String user;
+
+    /**
+     *
+     */
     String password;
+
+    /**
+     *
+     */
     String query;
+
+    /**
+     *
+     */
     ResultSet rs;
+
+    /**
+     *
+     */
     String records;
+
+    /**
+     *
+     */
     int count = 0;
     /**
      * Creates new form LogIn
@@ -40,7 +80,10 @@ public class RegisterPage extends javax.swing.JFrame {
         super.setTitle("Account");
         initComponents();
     }
+
+    /**
     @SuppressWarnings("unchecked")
+    */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

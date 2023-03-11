@@ -1,10 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+  The Tables package provides classes for creating and manipulating tables of data.
+  This includes classes for defining table structures, inserting and deleting rows and columns, 
+  and querying and modifying data in tables.
  */
 package Tables;
-
 import MainFrames.AddCustomer;
 import MainFrames.Menu;
 import java.sql.Connection;
@@ -17,35 +16,82 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-
 /**
- *
- * @author woola
+  The Customer_Table class represents a graphical user interface for displaying customer data in a table format.
+  It extends the javax.swing.JFrame class to create a window for displaying the data.
+  This class includes methods for setting up the table, adding data to it, and updating the view.
+  <p>This class is designed to be used in conjunction with a database system that stores customer data.</p>
+  @author woola
  */
 public class Customer_Table extends javax.swing.JFrame {
     //Declaring Variables
-    Connection con;
-    PreparedStatement statement;
-    Statement st;
-    String cs;
-    String user;
-    String password;
-    String query;
-    ResultSet rs;
-    String records;
-    int count = 0;
-    DefaultTableModel model;
 
     /**
-     * Creates new form Customer_Table
+     *
+     */
+    Connection con;
+
+    /**
+     *
+     */
+    PreparedStatement statement;
+
+    /**
+     *
+     */
+    Statement st;
+
+    /**
+     *
+     */
+    String cs;
+
+    /**
+     *
+     */
+    String user;
+
+    /**
+     *
+     */
+    String password;
+
+    /**
+     *
+     */
+    String query;
+
+    /**
+     *
+     */
+    ResultSet rs;
+
+    /**
+     *
+     */
+    String records;
+
+    /**
+     *
+     */
+    int count = 0;
+
+    /**
+     *
+     */
+    DefaultTableModel model;
+    /**
+     Constructs a new Customer_Table object and initializes the user interface components.
      */
     public Customer_Table() {
+       // Initializing the user interface components
         con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
         user = "root";
         password = "";
         initComponents();
+         // Connect to the database and execute a query to retrieve customer data and display it into a table.
          try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -163,18 +209,30 @@ public class Customer_Table extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  /**
+      Handles the event when the "back" button is clicked.
+      <p>This method is called when the user clicks the "back" button in the user interface.
+      It closes the customer form and opens the menu form.</p>
+      @param evt the ActionEvent object represent the event that will occur
+     */
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
+        // Callling the Menu form.
         Menu menu = new Menu();
         menu.show();
+        //closing the AddCustomer form
         dispose();
     }//GEN-LAST:event_btnbackActionPerformed
-
+    /**
+      Handles the event when the "addNewCustomer" button is clicked.
+      <p>This method is called when the user clicks the "add new customer" button in the user interface.
+      It opens the add new customer form once clicked.</p>
+      @param evt the ActionEvent object representing the event will occur
+    */
     private void btnaddnewcustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddnewcustomerActionPerformed
-        // TODO add your handling code here:
+        // calling thne AddCustomer form.
         AddCustomer addcustomer = new AddCustomer();
         addcustomer.show();
+        //closing the customer_table menu
         dispose();
     }//GEN-LAST:event_btnaddnewcustomerActionPerformed
 

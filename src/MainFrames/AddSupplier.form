@@ -53,27 +53,23 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="nametxt" alignment="0" min="-2" pref="465" max="-2" attributes="0"/>
-                                          <Component id="lblmobile" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Component id="mobiletxt" alignment="0" min="-2" pref="465" max="-2" attributes="0"/>
-                                          <Component id="lblproduct" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="txtdistrict" min="-2" pref="368" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="box1" min="-2" pref="89" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="lblcategory" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="lbldistrict" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="nametxt" alignment="0" min="-2" pref="465" max="-2" attributes="0"/>
+                                  <Component id="lblmobile" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="mobiletxt" alignment="0" min="-2" pref="465" max="-2" attributes="0"/>
+                                  <Component id="lblproduct" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="txtdistrict" min="-2" pref="368" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="box1" min="-2" pref="89" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
+                          <Component id="lblcategory" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="lbldistrict" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

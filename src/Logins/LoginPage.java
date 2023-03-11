@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+  The login package contains classes for managing user logins.
  */
 package Logins;
 import MainFrames.Menu;
@@ -15,23 +13,66 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 /**
- *
- * @author woola
+  The LoginPage class represents a GUI for a login page.
+  It extends the javax.swing.JFrame class to provide window and GUI functionality
+  <p>The Log in page class handles user login and authentication.</p>
+  @author woola
  */
 public class LoginPage extends javax.swing.JFrame {
      //Declaring Variables
+
+    /**
+     *
+     */
     Connection con;
+
+    /**
+     *
+     */
     PreparedStatement statement;
+
+    /**
+     *
+     */
     Statement st;
+
+    /**
+     *
+     */
     String cs;
+
+    /**
+     *
+     */
     String user;
+
+    /**
+     *
+     */
     String password;
+
+    /**
+     *
+     */
     String query;
+
+    /**
+     *
+     */
     ResultSet rs;
+
+    /**
+     *
+     */
     String records;
+
+    /**
+     *
+     */
     int count = 0;
     /**
-     * Creates new form LogIn
+     Constructs a new LoginPage object and initializes the user interface components.
+     This method initializes the GUI components and sets up the window properties.
      */
     public LoginPage() {
         con = null;
@@ -42,9 +83,15 @@ public class LoginPage extends javax.swing.JFrame {
         super.setTitle("Account");
         initComponents();
     }
+
+    /**
+     *
+     */
     public static Connection conn = null;
 
+    /**
     @SuppressWarnings("unchecked")
+    */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -216,28 +263,48 @@ public class LoginPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ /**Initializing components */
+    
+    /**
+       Handles the event when the "exit" button is clicked.
+      <p>This method is called when the user clicks the "exit" button in the user interface.
+      It closes the loginPage form once the exit button is clicked.</p>
+      @param evt the ActionEvent object represent the event that will occur:
+     */
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_ExitActionPerformed
-
+/**
+   Handles the event when the "login" button is clicked.
+  <p>This method is called when the user clicks the "login" button in the user interface.
+  It loads the menu if at all the login has been successful.</p>
+  @param evt the ActionEvent object represent the event that will occur:
+ */
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        
+        //declaring variables.
         String s1 = Username.getText();
         String s2 = Password.getText();
+        // Connect to the database and execute a query to retrieve login information.
         try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
             st = con.createStatement();
             query = "SELECT login_Username, login_Password FROM login WHERE login_Username = '" + s1 + "' AND login_Password = '" + s2 +"'";//exwcute 
             ResultSet rs = st.executeQuery(query);
+            //if password and username text fields are left empty:
             if(!s1.equals("") && !s2.equals("")){
+                // Iterate over the result set and checks if enetered username and passswod exists in the database.
                 if(rs.next()) {
                  //calling dashboard form
                 Menu menu = new Menu();
                 menu.show();
                 dispose(); // closing current form
                 }
+             /**
+             Shows a message dialog with the specified message.
+             @param parentComponent the parent component for the dialog, or null if there is no parent
+             @param displays "Invalid username or password" if entered info does not exist in the database
+            */
                 else {
                        JOptionPane.showMessageDialog(null, "Invalid username or password");
                         Username.setText("");
@@ -246,6 +313,11 @@ public class LoginPage extends javax.swing.JFrame {
                        Username.requestFocus();
                 }
             }
+            /**
+             Shows a message dialog with the specified message.
+             @param parentComponent the parent component for the dialog, or null if there is no parent
+             @param displays "all fields required " if they are left empty
+            */
             else{
                 JOptionPane.showMessageDialog(null, "All fields are required");
                 Username.setText("");
@@ -268,12 +340,17 @@ public class LoginPage extends javax.swing.JFrame {
          }
       }
     }//GEN-LAST:event_LoginActionPerformed
-
+/**
+   Handles the event when the "register" button is clicked.
+  <p>This method is called when the user clicks the "register" button in the user interface.
+  It loads the registration form once the register button is clicked.</p>
+  @param evt the ActionEvent object represent the event that will occur
+ */
     private void btnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregisterActionPerformed
-        // TODO add your handling code here:
-        //calling the registerpage form
+        //calling the registerpage form:
         RegisterPage registerpage = new RegisterPage();
         registerpage.show();
+        //closes the login page form:
         dispose();
     }//GEN-LAST:event_btnregisterActionPerformed
 

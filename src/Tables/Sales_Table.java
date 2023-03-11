@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+  The Tables package provides classes for creating and manipulating tables of data.
+  This includes classes for defining table structures, inserting and deleting rows and columns, 
+  and querying and modifying data in tables.
  */
 package Tables;
 import MainFrames.AddCustomer;
@@ -16,26 +16,77 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import com.raven.datechooser.DateChooser;
+import java.text.SimpleDateFormat;
 /**
- *
- * @author woola
+  The Sales_Table class represents a graphical user interface for displaying sales data in a table format.
+  It extends the javax.swing.JFrame class to create a window for displaying the data.
+  This class includes methods for setting up the table, adding data to it, and updating the view.
+  <p>This class is designed to be used in conjunction with a database system that stores sales data.</p>
+  @author woola
  */
-public class Sales_Table extends javax.swing.JFrame {
-     //Declaring Variables
+public final class Sales_Table extends javax.swing.JFrame {
+    //Declaring Variables
+
+    /**
+     *
+     */
+    DateChooser datechooser = new DateChooser();
+
+    /**
+     *
+     */
     Connection con;
+
+    /**
+     *
+     */
     PreparedStatement statement;
+
+    /**
+     *
+     */
     Statement st;
+
+    /**
+     *
+     */
     String cs;
+
+    /**
+     *
+     */
     String user;
+
+    /**
+     *
+     */
     String password;
+
+    /**
+     *
+     */
     String query;
+
+    /**
+     *
+     */
     ResultSet rs;
+
+    /**
+     *
+     */
     String records;
+
+    /**
+     *
+     */
     int count = 0;
     /**
-     * Creates new form Sales_Table
+     Constructs a new Sales_Table object and initializes the user interface components.
      */
     public Sales_Table() {
+        // Initializing the user interface components
         con = null;
         st = null;
         cs = "jdbc:mysql://localhost:3306/inventorydatabase";
@@ -46,8 +97,14 @@ public class Sales_Table extends javax.swing.JFrame {
         AddDataToProduct();
         AddDataToPrice();
         AddDataToAddress();
+        datechooser.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+        datechooser.setTextField(txtdate); 
     }
+     /**
+      Loads data from a database and adds it to the customer name comboBox.
+     */
      public void AddDataToCustomer(){
+        // Connect to the database and execute a query to retrieve customer names.
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -55,6 +112,7 @@ public class Sales_Table extends javax.swing.JFrame {
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
+            // Iterate over the result set and add items to the comboBox
             while(rs.next()){
                 box.addItem(rs.getString("Name"));   
             }
@@ -74,8 +132,11 @@ public class Sales_Table extends javax.swing.JFrame {
             }
         }
     }
-    
+    /**
+      Loads data from a database and adds it to the product comboBox.
+     */
      public void AddDataToProduct(){
+         // Connect to the database and execute a query to retrieve product names.
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -83,6 +144,7 @@ public class Sales_Table extends javax.swing.JFrame {
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
+            // Iterate over the result set and add items to the comboBox
             while(rs.next()){
                 box1.addItem(rs.getString("Name"));   
             }
@@ -103,7 +165,11 @@ public class Sales_Table extends javax.swing.JFrame {
         
         }
     }
+      /**
+      Loads data from a database and adds it to the price name comboBox.
+     */
      public void AddDataToPrice(){
+         // Connect to the database and execute a query to retrieve product prices.
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -111,6 +177,7 @@ public class Sales_Table extends javax.swing.JFrame {
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
+            // Iterate over the result set and add items to the comboBox
             while(rs.next()){
                 box2.addItem(rs.getString("Price"));   
             }
@@ -131,7 +198,11 @@ public class Sales_Table extends javax.swing.JFrame {
         
         }
     }
+      /**
+      Loads data from a database and adds it to the address comboBox.
+     */
      public void AddDataToAddress(){
+         // Connect to the database and execute a query to retrieve location address.
         try {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -139,6 +210,7 @@ public class Sales_Table extends javax.swing.JFrame {
             st = con.createStatement();           
             statement = con.prepareStatement(query);
             rs = st.executeQuery(query);
+            // Iterate over the result set and add items to the comboBox
             while(rs.next()){
                 box3.addItem(rs.getString("Address"));   
             }
@@ -158,14 +230,6 @@ public class Sales_Table extends javax.swing.JFrame {
             }
         }
     }
-     
-//     public void getAmmount(){
-//     int sum = 0;
-//     for(int i = 0 ; i<salestable.getRowCount(); i++){
-//     sum = sum + Integer.parseInt(salestable.getValueAt(1, 4).toString());
-//     }
-//     txtname.setText(Integer.toString(sum));
-//             }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -202,8 +266,14 @@ public class Sales_Table extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnaddsale = new javax.swing.JButton();
         btnedit = new javax.swing.JButton();
-        btntotal = new javax.swing.JButton();
         txttotal = new javax.swing.JTextField();
+        lbltotal = new javax.swing.JLabel();
+        txtdate = new javax.swing.JTextField();
+        lbldate = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lbltitle = new javax.swing.JLabel();
+        lbllocation = new javax.swing.JLabel();
+        lblcontactinfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Make A Sale");
@@ -241,6 +311,12 @@ public class Sales_Table extends javax.swing.JFrame {
         txtquantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtquantityActionPerformed(evt);
+            }
+        });
+
+        txtname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnameActionPerformed(evt);
             }
         });
 
@@ -302,7 +378,7 @@ public class Sales_Table extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -318,6 +394,7 @@ public class Sales_Table extends javax.swing.JFrame {
 
         jLabel1.setText("Mr/Mrs:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Tell:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -346,14 +423,25 @@ public class Sales_Table extends javax.swing.JFrame {
             }
         });
 
-        btntotal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btntotal.setForeground(new java.awt.Color(0, 204, 0));
-        btntotal.setText("Generate Total");
-        btntotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btntotalActionPerformed(evt);
-            }
-        });
+        lbltotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbltotal.setForeground(new java.awt.Color(0, 204, 204));
+        lbltotal.setText("Total Amount");
+
+        lbldate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbldate.setForeground(new java.awt.Color(0, 0, 255));
+        lbldate.setText("DATE");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("RECIEPT");
+
+        lbltitle.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbltitle.setText("M & J MULTIPURPOSE ENTERPRISES LTD");
+
+        lbllocation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbllocation.setText("PURSE STREET OPPOSITE LORRY PARK, PO.BOX 229, HOIMA");
+
+        lblcontactinfo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblcontactinfo.setText("TELL: 0771172559/ 0706629737         EMAIL: woolardsamuesl@gmail.com");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -397,27 +485,58 @@ public class Sales_Table extends javax.swing.JFrame {
                         .addComponent(btndelete)))
                 .addGap(23, 23, 23)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btntotal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtaddress, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(txtname)
-                            .addComponent(jTextField1)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(330, 330, 330)
+                                .addComponent(lbltotal)
+                                .addGap(18, 18, 18)
+                                .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(28, 28, 28)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblcontactinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtaddress)
+                                                    .addComponent(txtname))
+                                                .addGap(138, 138, 138)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(105, 105, 105))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(31, 31, 31)
+                                                        .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(42, 42, 42)))))))))
+                        .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addComponent(lbllocation, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(163, 163, 163)
+                                .addComponent(lbltitle)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,32 +544,40 @@ public class Sales_Table extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnconfirmsale))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtaddress))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                                .addGap(3, 3, 3)))
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbltitle)
+                        .addGap(11, 11, 11)
+                        .addComponent(lbllocation, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblcontactinfo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btntotal)
-                            .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbltotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txttotal, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                .addGap(17, 17, 17))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(namelbl, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
@@ -471,10 +598,10 @@ public class Sales_Table extends javax.swing.JFrame {
                         .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblprice, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(box2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(box2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtprice, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btndelete)
@@ -485,35 +612,52 @@ public class Sales_Table extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+  Handles the event when the "back" button is clicked.
+  <p>This method is called when the user clicks the "back" button in the user interface.
+  It returns the user to the previous screen or view.</p>
+  @param evt the ActionEvent object representing the event will occur occurred
+ */
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
+        //calling the menue frame
         Menu menu = new Menu();
         menu.show();
         dispose();
     }//GEN-LAST:event_btnbackActionPerformed
-
+/**
+  Handles the selection of an item in the JComboBox.
+  @param evt is the ActionEvent object that trigger this method
+ */
     private void boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxActionPerformed
-        // TODO add your handling code here:
+         //seting the data in the comboBox to the name texField:
         txtname.setText((String) box.getSelectedItem());
 
     }//GEN-LAST:event_boxActionPerformed
-
+/**
+  Handles the selection of an item in the JComboBox.
+  @param evt is the ActionEvent object that trigger this method
+ */
     private void box1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box1ActionPerformed
-        // TODO add your handling code here:
+        //seting the data in the comboBox to the roduct texField:
          txtproduct.setText((String) box1.getSelectedItem());
     }//GEN-LAST:event_box1ActionPerformed
-
+/**
+  Handles the selection of an item in the JComboBox.
+  @param evt is the ActionEvent object that trigger this method
+ */
     private void box3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box3ActionPerformed
-        // TODO add your handling code here:
+        //seting the data in the comboBox to the Address texField:
         txtaddress.setText((String) box3.getSelectedItem());
     }//GEN-LAST:event_box3ActionPerformed
-
+   /**
+    Handles the selection of an item in the JComboBox.
+    @param evt is the ActionEvent object that trigger this method
+   */
     private void box2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box2ActionPerformed
-        // TODO add your handling code here:
+        //seting the data in the comboBox to the Price texField:
         txtprice.setText((String) box2.getSelectedItem());
     }//GEN-LAST:event_box2ActionPerformed
-
+    
     private void txtaddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtaddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtaddressActionPerformed
@@ -529,9 +673,13 @@ public class Sales_Table extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+/**
+  Handles the event when the "delete" button is clicked.
+  <p>This method is called when the user clicks the "delete" button in the user interface.
+  It deletes a selected row in the table once clicked.</p>
+  @param evt the ActionEvent object representing the event will occur occurred
+ */
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
-        // TODO add your handling code here:
         //getting jtable model
         DefaultTableModel model = (DefaultTableModel)salestable.getModel();
         //delete data
@@ -550,26 +698,45 @@ public class Sales_Table extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btndeleteActionPerformed
-
+/**
+  Handles the event when the "addSale" button is clicked.
+  <p>This method is called when the user clicks the "addSale" button in the user interface.
+  It adds a row in the table once clicked.</p>
+  @param evt the ActionEvent object representing the event will occur occurred
+ */
     private void btnaddsaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddsaleActionPerformed
-        // TODO add your handling code here:
+        if(!txtquantity.getText().equals("") && !txtprice.getText().equals("")){
+        int quantity = Integer.parseInt(txtquantity.getText());
+        int price = Integer.parseInt(txtprice.getText());
         DefaultTableModel model = (DefaultTableModel)salestable.getModel();
         model.addRow(new Object[]{txtquantity.getText(), txtproduct.getText(),
-                                  txtprice.getText()});
+                                  txtprice.getText(), Integer.toString(price * quantity)});
         txtproduct.setText("");//making empty
         txtquantity.setText("");//making empty
         txtprice.setText("");//making field empty
         //setting focus to txtquantity
         txtproduct.requestFocus();
         //
+        double sum = 0;
+        for (int i = 0; i< salestable.getRowCount(); i++){
+            int amount = Integer.parseInt((String)salestable.getValueAt(i, 3));
+            sum+=amount;
+        }
+    txttotal.setText(String.valueOf(sum));
+        }else{
+            JOptionPane.showMessageDialog(null, "Please enter quantity, product and rate");
+        }
     }//GEN-LAST:event_btnaddsaleActionPerformed
-
     private void txtpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtpriceActionPerformed
-
+/**
+  Handles the event when the "adit" button is clicked.
+  <p>This method is called when the user clicks the "edit" button in the user interface.
+  It edits and updates elements in a selected row in the table once clicked.</p>
+  @param evt the ActionEvent object representing the event will occur occurred
+ */
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
-        // TODO add your handling code here:
         //getting table model
         DefaultTableModel model = (DefaultTableModel)salestable.getModel();
          //delete data
@@ -595,7 +762,12 @@ public class Sales_Table extends javax.swing.JFrame {
             }
         } 
     }//GEN-LAST:event_btneditActionPerformed
-
+/**
+ Handles the event when a row in the sales table is clicked.
+ <p>This method is called when the user clicks on a row in the sales table.
+ It retrieves the data for the selected row and displays it in respective text fields.</p>
+ @param evt the MouseEvent object represent the event that occur
+ */
     private void salestableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salestableMouseClicked
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel)salestable.getModel();
@@ -609,24 +781,16 @@ public class Sales_Table extends javax.swing.JFrame {
         txtprice.setText(mytable2);
     }//GEN-LAST:event_salestableMouseClicked
 
-    private void btntotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntotalActionPerformed
+    private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
         // TODO add your handling code here:
-           double sum = 0;
-        for (int i = 0; i< salestable.getRowCount(); i++){
-            int amount = Integer.parseInt((String)salestable.getValueAt(i, 2));
-            sum+=amount;
-        }
-    txttotal.setText(String.valueOf(sum));
-    
-    try{
-        String update="";
-    
-    }catch(Exception ex){}
-    }//GEN-LAST:event_btntotalActionPerformed
+    }//GEN-LAST:event_txtnameActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+        The main entry point for the Sales_Table application.
+        <p>This method is the entry point for the Sales_Table application.
+        It initializes the application and creates the main user interface window.</p>
+         @param args the command line arguments
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -656,7 +820,6 @@ public class Sales_Table extends javax.swing.JFrame {
             new Sales_Table().setVisible(true);
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> box;
     private javax.swing.JComboBox<String> box1;
@@ -667,21 +830,27 @@ public class Sales_Table extends javax.swing.JFrame {
     private javax.swing.JButton btnconfirmsale;
     private javax.swing.JButton btndelete;
     private javax.swing.JButton btnedit;
-    private javax.swing.JButton btntotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbladdress;
+    private javax.swing.JLabel lblcontactinfo;
+    private javax.swing.JLabel lbldate;
+    private javax.swing.JLabel lbllocation;
     private javax.swing.JLabel lblprice;
     private javax.swing.JLabel lblproduct;
+    private javax.swing.JLabel lbltitle;
+    private javax.swing.JLabel lbltotal;
     private javax.swing.JLabel namelbl;
     private javax.swing.JLabel quantitylbl;
     private javax.swing.JTable salestable;
     private javax.swing.JTextField txtaddress;
+    private javax.swing.JTextField txtdate;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtprice;
     private javax.swing.JTextField txtproduct;
