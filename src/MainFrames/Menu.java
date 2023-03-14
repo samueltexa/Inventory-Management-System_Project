@@ -11,7 +11,10 @@ import Tables.Sales_Table;
 import Tables.Supplier_Table;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
@@ -189,6 +192,11 @@ public class Menu extends javax.swing.JFrame {
         taskpanel.add(Menumenu);
 
         reportmenu.setText("Report");
+        reportmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportmenuActionPerformed(evt);
+            }
+        });
 
         salesmenu.setText("Sales Report");
         salesmenu.addActionListener(new java.awt.event.ActionListener() {
@@ -250,15 +258,26 @@ public class Menu extends javax.swing.JFrame {
     private void salesmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesmenuActionPerformed
         // step 1
         Document document = new Document(PageSize.A5.rotate());
-            try {
-                // step 2
-                PdfWriter.getInstance(document, new FileOutputStream(RESULT));
-            } catch (FileNotFoundException | DocumentException ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(RESULT));
+        } catch (FileNotFoundException | DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // step 3
         //opening  the document
         document.open();
+        Paragraph heading = new Paragraph("Customers List", new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD));
+        heading.setAlignment(Element.ALIGN_CENTER);
+        try {
+            document.add(heading);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            document.add(new Paragraph(" "));
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // step 4
         PdfPTable table = new PdfPTable(4);
         try{
@@ -270,7 +289,7 @@ public class Menu extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
             st = con.createStatement();
-            query = "select * from customer";//exwcute 
+            query = "select * from customer where District = 'Kampala'";//exwcute 
              rs = st.executeQuery(query);
             while(rs.next()){    
                 table.addCell(rs.getString("Name"));
@@ -295,6 +314,10 @@ public class Menu extends javax.swing.JFrame {
         document.close();
         }  
     }//GEN-LAST:event_salesmenuActionPerformed
+
+    private void reportmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportmenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reportmenuActionPerformed
     /**
      * @param args the command line arguments
      */
