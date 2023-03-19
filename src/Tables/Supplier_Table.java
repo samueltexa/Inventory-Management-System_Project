@@ -4,8 +4,9 @@
   and querying and modifying data in tables.
  */
 package Tables;
+import InternalFrames.AddSupplier;
 import InternalFrames.DeleteSupplier;
-import MainFrames.AddSupplier;
+import InternalFrames.EditSupplier;
 import MainFrames.Menu;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  The Supplier_Table class represents a graphical user interface for displaying supplier data in a table format.
@@ -76,6 +78,7 @@ public class Supplier_Table extends javax.swing.JFrame {
         user = "root";
         password = "";
         initComponents();
+        setLocation(300,100);
          // Connect to the database and execute a query to retrieve supplier data and display it into a table.
          try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
@@ -156,6 +159,11 @@ public class Supplier_Table extends javax.swing.JFrame {
         btnedit.setBackground(java.awt.Color.green);
         btnedit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnedit.setText("Edit");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setBackground(java.awt.Color.green);
         btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -185,6 +193,11 @@ public class Supplier_Table extends javax.swing.JFrame {
 
             }
         ));
+        suppliertable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                suppliertableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(suppliertable);
 
         pane.setLayer(btnedit, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -268,10 +281,11 @@ public class Supplier_Table extends javax.swing.JFrame {
       @param evt the ActionEvent object representing the event will occur
      */
     private void btnaddnewproductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddnewproductsActionPerformed
-        //calling the addSupplier form.
+        pane.repaint();
+        //calling the Deleteproduct form
         AddSupplier addsupplier = new AddSupplier();
-        addsupplier.show();
-        dispose();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(addsupplier).setVisible(true);
     }//GEN-LAST:event_btnaddnewproductsActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -289,6 +303,31 @@ public class Supplier_Table extends javax.swing.JFrame {
         //adding the product form to the desktop pane and making it visible
         pane.add(deletesupplier).setVisible(true);
     }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        JOptionPane.showMessageDialog(this, "Please select the supplier to edit");
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void suppliertableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliertableMouseClicked
+                //Getting data of the selected row:
+        String name = model.getValueAt(suppliertable.getSelectedRow(), 0).toString();
+        String mobile = model.getValueAt(suppliertable.getSelectedRow(), 1).toString();
+        String product = model.getValueAt(suppliertable.getSelectedRow(), 2).toString();
+        String category = model.getValueAt(suppliertable.getSelectedRow(),3).toString();
+        String district = model.getValueAt(suppliertable.getSelectedRow(), 4).toString();
+        //calling the edit supplier form
+        EditSupplier editsupplier = new EditSupplier();
+        pane.repaint();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(editsupplier).setVisible(true);
+        //setting to textfield:
+        editsupplier.nametxt.setText(name);
+        editsupplier.mobiletxt.setText(mobile);
+        editsupplier.txtproduct.setText(product);
+        editsupplier.txtcategory.setText(category);
+        editsupplier.txtdistrict.setText(district);
+
+    }//GEN-LAST:event_suppliertableMouseClicked
     /**
      * @param args the command line arguments
      */

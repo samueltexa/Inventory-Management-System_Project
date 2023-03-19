@@ -5,7 +5,8 @@
  */
 package Tables;
 import InternalFrames.DeleteCustomer;
-import MainFrames.AddCustomer;
+import InternalFrames.AddCustomer;
+import InternalFrames.EditCustomer;
 import MainFrames.Menu;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
   The Customer_Table class represents a graphical user interface for displaying customer data in a table format.
@@ -76,6 +78,7 @@ public class Customer_Table extends javax.swing.JFrame {
         user = "root";
         password = "";
         initComponents();
+        setLocation(300,100);
          // Connect to the database and execute a query to retrieve customer data and display it into a table.
          try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
@@ -105,7 +108,7 @@ public class Customer_Table extends javax.swing.JFrame {
             con.close();
             }
         catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Products_Table.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Customer_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /**
@@ -122,7 +125,7 @@ public class Customer_Table extends javax.swing.JFrame {
         btnaddnewcustomer = new javax.swing.JButton();
         pane = new javax.swing.JDesktopPane();
         btnedit = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        btnrefresh = new javax.swing.JButton();
         btndelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         customertable = new javax.swing.JTable();
@@ -155,14 +158,19 @@ public class Customer_Table extends javax.swing.JFrame {
         btnedit.setBackground(java.awt.Color.green);
         btnedit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnedit.setText("Edit");
-
-        btnUpdate.setBackground(java.awt.Color.green);
-        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnUpdate.setText("Refresh");
-        btnUpdate.setToolTipText("click to refresh page");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btneditActionPerformed(evt);
+            }
+        });
+
+        btnrefresh.setBackground(java.awt.Color.green);
+        btnrefresh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnrefresh.setText("Refresh");
+        btnrefresh.setToolTipText("click to refresh page");
+        btnrefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnrefreshActionPerformed(evt);
             }
         });
 
@@ -184,10 +192,15 @@ public class Customer_Table extends javax.swing.JFrame {
 
             }
         ));
+        customertable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customertableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(customertable);
 
         pane.setLayer(btnedit, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        pane.setLayer(btnUpdate, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pane.setLayer(btnrefresh, javax.swing.JLayeredPane.DEFAULT_LAYER);
         pane.setLayer(btndelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
         pane.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -199,7 +212,7 @@ public class Customer_Table extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnedit)
                 .addGap(256, 256, 256)
-                .addComponent(btnUpdate)
+                .addComponent(btnrefresh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btndelete)
                 .addGap(23, 23, 23))
@@ -212,7 +225,7 @@ public class Customer_Table extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdate)
+                    .addComponent(btnrefresh)
                     .addComponent(btnedit)
                     .addComponent(btndelete))
                 .addGap(17, 17, 17))
@@ -268,11 +281,11 @@ public class Customer_Table extends javax.swing.JFrame {
       @param evt the ActionEvent object representing the event will occur
     */
     private void btnaddnewcustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddnewcustomerActionPerformed
-        // calling thne AddCustomer form.
+        pane.repaint();
+        //calling the Deleteproduct form
         AddCustomer addcustomer = new AddCustomer();
-        addcustomer.show();
-        //closing the customer_table menu
-        dispose();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(addcustomer).setVisible(true);
     }//GEN-LAST:event_btnaddnewcustomerActionPerformed
     /**
       Handles the event when the "update" button is clicked.
@@ -280,12 +293,12 @@ public class Customer_Table extends javax.swing.JFrame {
       It reloads the product table form.</p>
       @param evt the ActionEvent object represent the event that will occur
      */
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnrefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefreshActionPerformed
          //reloading the customer table
         Customer_Table customer_table = new Customer_Table();
         customer_table.show();
         dispose();
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnrefreshActionPerformed
     /**
       Handles the event when the "delete" button is clicked.
       <p>This method is called when the user clicks the "delete" button in the user interface.
@@ -299,6 +312,28 @@ public class Customer_Table extends javax.swing.JFrame {
         //adding the product form to the desktop pane and making it visible
         pane.add(deletecustomer).setVisible(true);
     }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void customertableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customertableMouseClicked
+         //Getting data of the selected row:
+        String name = model.getValueAt(customertable.getSelectedRow(), 0).toString();
+        String mobile = model.getValueAt(customertable.getSelectedRow(), 1).toString();
+        String district = model.getValueAt(customertable.getSelectedRow(), 2).toString();
+        String address = model.getValueAt(customertable.getSelectedRow(),3).toString();
+        //calling the edit prouct form
+        EditCustomer editcustomer = new EditCustomer();
+        pane.repaint();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(editcustomer).setVisible(true);
+        //setting to textfield
+        editcustomer.txtname.setText(name);
+        editcustomer.txtmobile.setText(mobile);
+        editcustomer.txtdistrict.setText(district);
+        editcustomer.txtaddress.setText(address);
+    }//GEN-LAST:event_customertableMouseClicked
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        JOptionPane.showMessageDialog(this, "Please select the customer to edit");
+    }//GEN-LAST:event_btneditActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -332,11 +367,11 @@ public class Customer_Table extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnaddnewcustomer;
     private javax.swing.JButton btnback;
     private javax.swing.JButton btndelete;
     private javax.swing.JButton btnedit;
+    private javax.swing.JButton btnrefresh;
     private javax.swing.JTable customertable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator line;

@@ -85,6 +85,7 @@ public class Menu extends javax.swing.JFrame {
         user = "root";
         password = "";
         initComponents();
+        setLocation(300,100);
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -4,9 +4,10 @@
   and querying and modifying data in tables.
  */
 package Tables;
+import InternalFrames.AddProduct;
 import InternalFrames.DeleteProduct;
+import InternalFrames.EditProduct;
 import MainFrames.Menu;
-import MainFrames.AddProducts;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  The Product_Table class represents a graphical user interface for displaying product data in a table format.
@@ -76,7 +78,8 @@ public class Products_Table extends javax.swing.JFrame {
         user = "root";
         password = "";
         initComponents();
-         //Connect to the database and execute a query to retrieve product data and display it into a table.
+        setLocation(300,100);
+         //Connect to the database and execute a query to retrieve product data and display it into the product table.
          try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
@@ -91,7 +94,7 @@ public class Products_Table extends javax.swing.JFrame {
             }
             model = new DefaultTableModel();
             model.setColumnIdentifiers(colName); // setting the column headers
-            table.setModel(model); // setting the table model on JTable
+            producttable.setModel(model); // setting the table model on JTable
             String Name, Price, Number, Category, Quantity, Supplier;
             while (rs.next()){
                 Name = rs.getString(1);
@@ -110,6 +113,7 @@ public class Products_Table extends javax.swing.JFrame {
             Logger.getLogger(Products_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,12 +128,13 @@ public class Products_Table extends javax.swing.JFrame {
         line = new javax.swing.JSeparator();
         pane = new javax.swing.JDesktopPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        producttable = new javax.swing.JTable();
         btndelete = new javax.swing.JButton();
         btnedit = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("All Products");
 
         btnaddnewproducts.setBackground(new java.awt.Color(102, 255, 102));
         btnaddnewproducts.setFont(new java.awt.Font("Arial Black", 1, 11)); // NOI18N
@@ -153,7 +158,7 @@ public class Products_Table extends javax.swing.JFrame {
         line.setBackground(java.awt.Color.blue);
         line.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        producttable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -161,7 +166,12 @@ public class Products_Table extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(table);
+        producttable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                producttableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(producttable);
 
         btndelete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btndelete.setForeground(java.awt.Color.red);
@@ -176,6 +186,12 @@ public class Products_Table extends javax.swing.JFrame {
         btnedit.setBackground(java.awt.Color.green);
         btnedit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnedit.setText("Edit");
+        btnedit.setToolTipText("Click to adit products");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setBackground(java.awt.Color.green);
         btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -255,10 +271,11 @@ public class Products_Table extends javax.swing.JFrame {
       @param evt the ActionEvent object representing the event will occur
      */
     private void btnaddnewproductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddnewproductsActionPerformed
-        //calling the add product from:
-        AddProducts addproducts = new AddProducts();
-        addproducts.show();
-        dispose();
+       pane.repaint();
+        //calling the Deleteproduct form
+        AddProduct addproduct = new AddProduct();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(addproduct).setVisible(true);
     }//GEN-LAST:event_btnaddnewproductsActionPerformed
     /**
       Handles the event when the "back" button is clicked.
@@ -299,6 +316,32 @@ public class Products_Table extends javax.swing.JFrame {
         product_table.show();
         dispose();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        JOptionPane.showMessageDialog(this, "Please select the product to edit");
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void producttableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_producttableMouseClicked
+        //Getting data of the selected row:
+        String name = model.getValueAt(producttable.getSelectedRow(), 0).toString();
+        String price = model.getValueAt(producttable.getSelectedRow(), 1).toString();
+        String number = model.getValueAt(producttable.getSelectedRow(), 2).toString();
+        String category = model.getValueAt(producttable.getSelectedRow(),3).toString();
+        String quantity = model.getValueAt(producttable.getSelectedRow(), 4).toString();
+        String supplier = model.getValueAt(producttable.getSelectedRow(), 5).toString(); 
+        //calling the edit prouct form
+         EditProduct editproduct = new EditProduct();
+        pane.repaint();
+        //adding the product form to the desktop pane and making it visible
+        pane.add(editproduct).setVisible(true);
+        //setting to textfield
+        editproduct.txtname.setText(name);
+        editproduct.txtprice.setText(price);
+        editproduct.txtnumber.setText(number);
+        editproduct.txtcategory.setText(category);
+        editproduct.txtquantity.setText(quantity);
+        editproduct.txtsupplier.setText(supplier);
+    }//GEN-LAST:event_producttableMouseClicked
     /**
      * @param args the command line arguments
      */
@@ -340,6 +383,6 @@ public class Products_Table extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator line;
     private javax.swing.JDesktopPane pane;
-    private javax.swing.JTable table;
+    private javax.swing.JTable producttable;
     // End of variables declaration//GEN-END:variables
 }

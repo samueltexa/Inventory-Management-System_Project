@@ -4,7 +4,6 @@
   and querying and modifying data in tables.
  */
 package Tables;
-import MainFrames.AddCustomer;
 import MainFrames.Menu;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
@@ -77,6 +76,7 @@ public final class Sales_Table extends javax.swing.JFrame {
         user = "root";
         password = "";
         initComponents();
+        setLocation(300,100);
         AddDataToCustomer();
         AddDataToProduct();
         AddDataToPrice();
@@ -104,7 +104,7 @@ public final class Sales_Table extends javax.swing.JFrame {
              txtname.setText(null);
         }
         catch (SQLException | ClassNotFoundException ex){
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             try {
@@ -112,7 +112,7 @@ public final class Sales_Table extends javax.swing.JFrame {
                 statement.close();
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -136,7 +136,7 @@ public final class Sales_Table extends javax.swing.JFrame {
              txtproduct.setText(null);
             
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             try {
@@ -144,7 +144,7 @@ public final class Sales_Table extends javax.swing.JFrame {
                 statement.close();
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -168,7 +168,7 @@ public final class Sales_Table extends javax.swing.JFrame {
              txtproduct.setText(null);
             
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             try {
@@ -176,7 +176,7 @@ public final class Sales_Table extends javax.swing.JFrame {
                 statement.close();
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -200,7 +200,7 @@ public final class Sales_Table extends javax.swing.JFrame {
              txtproduct.setText(null);
         }
         catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             try {
@@ -208,7 +208,7 @@ public final class Sales_Table extends javax.swing.JFrame {
                 statement.close();
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
