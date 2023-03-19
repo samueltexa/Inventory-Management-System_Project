@@ -5,6 +5,10 @@
  */
 package Tables;
 import MainFrames.Menu;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +20,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import com.raven.datechooser.DateChooser;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import javax.swing.JFileChooser;
 /**
   The Sales_Table class represents a graphical user interface for displaying sales data in a table format.
   It extends the javax.swing.JFrame class to create a window for displaying the data.
@@ -285,6 +292,11 @@ public final class Sales_Table extends javax.swing.JFrame {
 
         btnconfirmsale.setText("Confirm Sale");
         btnconfirmsale.setToolTipText("confirm sale");
+        btnconfirmsale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconfirmsaleActionPerformed(evt);
+            }
+        });
 
         lblproduct.setText("Product");
 
@@ -765,6 +777,46 @@ public final class Sales_Table extends javax.swing.JFrame {
     private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnameActionPerformed
+
+    private void btnconfirmsaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfirmsaleActionPerformed
+        String path ="";
+        JFileChooser jchooser = new JFileChooser();
+        jchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x = jchooser.showSaveDialog(this);
+        if(x== JFileChooser.APPROVE_OPTION){
+            path = jchooser.getSelectedFile().getPath();
+
+        }
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document,new FileOutputStream(path + "reciept.pdf"));
+            document.open();
+            PdfPTable ptable = new PdfPTable(4);
+            //adding header
+            ptable.addCell("Quantity");
+            ptable.addCell("Product");
+            ptable.addCell("Rate");
+            ptable.addCell("Amount");
+
+            for(int i = 0; i<salestable.getRowCount(); i++){
+                String quantity = salestable.getValueAt(i, 0).toString();
+                String product = salestable.getValueAt(i, 1).toString();
+                String rate = salestable.getValueAt(i, 2).toString();
+                String amount = salestable.getValueAt(i, 3).toString();
+
+                ptable.addCell(quantity);
+                ptable.addCell(product);
+                ptable.addCell(rate);
+                ptable.addCell(amount);
+
+            }
+            document.add(ptable);
+
+        } catch (FileNotFoundException | DocumentException ex) {
+            Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        document.close();
+    }//GEN-LAST:event_btnconfirmsaleActionPerformed
 
     /**
         The main entry point for the Sales_Table application.
