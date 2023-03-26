@@ -84,7 +84,7 @@ public class Customer_Table extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
             st = con.createStatement();
-            query = "SELECT Name, Mobile, District, Address FROM customer";
+            query = "SELECT Name, Mobile,Email, District, Address FROM customer";
             rs = st.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
             int cols = rsmd.getColumnCount();
@@ -95,13 +95,14 @@ public class Customer_Table extends javax.swing.JFrame {
             model = new DefaultTableModel();
             model.setColumnIdentifiers(colName); // setting the column headers
             customertable.setModel(model); // setting the table model on JTable
-            String Name, Mobile, District, Address;
+            String Name, Mobile,Email, District, Address;
             while (rs.next()){
                 Name = rs.getString(1);
                 Mobile = rs.getString(2);
-                District = rs.getString(3);
-                Address = rs.getString(4);
-                String[] row = {Name, Mobile, District, Address};
+                Email = rs.getString(3);
+                District = rs.getString(4);
+                Address = rs.getString(5);
+                String[] row = {Name, Mobile,Email, District, Address};
             model.addRow(row);
             }
             st.close();
@@ -317,8 +318,9 @@ public class Customer_Table extends javax.swing.JFrame {
          //Getting data of the selected row:
         String name = model.getValueAt(customertable.getSelectedRow(), 0).toString();
         String mobile = model.getValueAt(customertable.getSelectedRow(), 1).toString();
-        String district = model.getValueAt(customertable.getSelectedRow(), 2).toString();
-        String address = model.getValueAt(customertable.getSelectedRow(),3).toString();
+        String email = model.getValueAt(customertable.getSelectedRow(), 2).toString();
+        String district = model.getValueAt(customertable.getSelectedRow(), 3).toString();
+        String address = model.getValueAt(customertable.getSelectedRow(),4).toString();
         //calling the edit prouct form
         EditCustomer editcustomer = new EditCustomer();
         pane.repaint();
@@ -327,6 +329,7 @@ public class Customer_Table extends javax.swing.JFrame {
         //setting to textfield
         editcustomer.txtname.setText(name);
         editcustomer.txtmobile.setText(mobile);
+        editcustomer.txtemail.setText(email);
         editcustomer.txtdistrict.setText(district);
         editcustomer.txtaddress.setText(address);
     }//GEN-LAST:event_customertableMouseClicked

@@ -138,6 +138,8 @@ public class AddCustomer extends javax.swing.JInternalFrame {
         lbladdress = new javax.swing.JLabel();
         txtaddress = new javax.swing.JTextField();
         btnsave = new javax.swing.JButton();
+        lblemail = new javax.swing.JLabel();
+        txtemail = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -187,36 +189,37 @@ public class AddCustomer extends javax.swing.JInternalFrame {
             }
         });
 
+        lblemail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblemail.setText("Email");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lbladdress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                        .addComponent(lbldistrict, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                        .addComponent(lblemail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(namelbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtmobile, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(namelbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbldistrict, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblmobile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtdistrict, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(box, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtmobile, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtname, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbladdress, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(57, 57, 57))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnsave)
-                        .addGap(208, 208, 208))))
+                        .addComponent(txtdistrict)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(box, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtaddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(txtname)
+                    .addComponent(txtemail, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(57, 57, 57))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btnsave)
+                .addGap(211, 211, 211))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,6 +232,10 @@ public class AddCustomer extends javax.swing.JInternalFrame {
                     .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblemail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtemail, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbldistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtdistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,9 +247,9 @@ public class AddCustomer extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(btnsave)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -258,24 +265,26 @@ public class AddCustomer extends javax.swing.JInternalFrame {
         //declaring and iniatializing variables
         String s1 = txtname.getText();
         String s2 = txtmobile.getText();
-        String s3 = txtdistrict.getText();
-        String s4 = txtaddress.getText();
+        String s3 = txtemail.getText();
+        String s4 = txtdistrict.getText();
+        String s5 = txtaddress.getText();
         try{
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
             st = con.createStatement();
-            query = "SELECT * FROM customer where Name = '" + s1 + "'";
+            query = "SELECT * FROM customer where Email = '" + s3 + "' or Name = '" + s1 + "' ";
             ResultSet re1 = st.executeQuery(query);
-            if(!s1.equals("") && !s2.equals("") && !s3.equals("") && !s4.equals("")){
+            if(!s1.equals("") && !s2.equals("") && !s3.equals("")  && !s4.equals("") && !s5.equals("")){
                 if(re1.next()){
-                    JOptionPane.showMessageDialog(null, "customer name already exists");
+                    JOptionPane.showMessageDialog(null, "Customer name or email already exists");
                 }
                 else{
-                    query = "INSERT INTO customer(Name, Mobile, District, Address) VALUES('" + s1 + "','" + s2 +"','" + s3 +"','" + s4 +"')";
+                    query = "INSERT INTO customer(Name, Mobile, Email, District, Address) VALUES('" + s1 + "','" + s2 +"','" + s3 +"','" + s4 +"', '" + s5 +"')";
                     st.executeUpdate(query);// savings
                     JOptionPane.showMessageDialog(null, "Customer saved Successfully");
                     txtname.setText("");//make empty
                     txtmobile.setText("");//make empty
+                    txtemail.setText("");//make empty
                     txtdistrict.setText("");//make empty
                     txtaddress.setText("");//make empty
                     //set focus to txtname
@@ -316,10 +325,12 @@ public class AddCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnsave;
     private javax.swing.JLabel lbladdress;
     private javax.swing.JLabel lbldistrict;
+    private javax.swing.JLabel lblemail;
     private javax.swing.JLabel lblmobile;
     private javax.swing.JLabel namelbl;
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtdistrict;
+    private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtmobile;
     private javax.swing.JTextField txtname;
     // End of variables declaration//GEN-END:variables

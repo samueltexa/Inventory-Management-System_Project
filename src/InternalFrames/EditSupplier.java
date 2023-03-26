@@ -364,13 +364,16 @@ public class EditSupplier extends javax.swing.JInternalFrame {
             Class.forName("com.mysql.jdbc.Driver"); //register the driver
             con = DriverManager.getConnection(cs, user, password);
             st = con.createStatement();
-            query = "update suplier set Name ='" + nametxt.getText() + "', Mobile ='" + mobiletxt.getText() + "', Product ='" + txtproduct.getText() + "', Category ='" + txtcategory.getText() + "', District ='" + txtdistrict.getText() + "'";
+            query = "update suplier set Mobile ='" + mobiletxt.getText() + "',"
+                    + "Product ='" + txtproduct.getText() + "',"
+                    + "Category ='" + txtcategory.getText() + "',"
+                    + "District ='" + txtdistrict.getText() + "' WHERE Name ='" + nametxt.getText() + "',";
             int success = st.executeUpdate(query);
             if(success == 1){
-                JOptionPane.showMessageDialog(null, " Record Updated Succefully.");   
+                JOptionPane.showMessageDialog(null, "Supplier Information Updated Succefully.");   
             }
             else{
-                JOptionPane.showMessageDialog(null, "The product could not be updateds");
+                JOptionPane.showMessageDialog(null, "The Supplier could not be updated");
             }
             nametxt.setText("");
             mobiletxt.setText("");

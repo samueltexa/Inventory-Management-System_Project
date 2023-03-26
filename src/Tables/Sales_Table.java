@@ -5,8 +5,13 @@
  */
 package Tables;
 import MainFrames.Menu;
+import static MainFrames.Menu.RESULT;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import javax.swing.table.DefaultTableModel;
@@ -20,10 +25,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import com.raven.datechooser.DateChooser;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import javax.swing.JFileChooser;
 /**
   The Sales_Table class represents a graphical user interface for displaying sales data in a table format.
   It extends the javax.swing.JFrame class to create a window for displaying the data.
@@ -32,6 +39,7 @@ import javax.swing.JFileChooser;
   @author woola
  */
 public final class Sales_Table extends javax.swing.JFrame {
+     public static final String RESULT = "reciept.pdf";
      /**
      creating an object of the class DateChooser
      */
@@ -260,9 +268,6 @@ public final class Sales_Table extends javax.swing.JFrame {
         txtdate = new javax.swing.JTextField();
         lbldate = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lbltitle = new javax.swing.JLabel();
-        lbllocation = new javax.swing.JLabel();
-        lblcontactinfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Make A Sale");
@@ -428,15 +433,6 @@ public final class Sales_Table extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("RECIEPT");
 
-        lbltitle.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbltitle.setText("M & J MULTIPURPOSE ENTERPRISES LTD");
-
-        lbllocation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbllocation.setText("PURSE STREET OPPOSITE LORRY PARK, PO.BOX 229, HOIMA");
-
-        lblcontactinfo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblcontactinfo.setText("TELL: 0771172559/ 0706629737         EMAIL: woolardsamuesl@gmail.com");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -477,57 +473,41 @@ public final class Sales_Table extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(lbltotal)
+                        .addGap(18, 18, 18)
+                        .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(330, 330, 330)
-                                .addComponent(lbltotal)
-                                .addGap(18, 18, 18)
-                                .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(28, 28, 28)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtaddress)
+                                    .addComponent(txtname))
+                                .addGap(138, 138, 138)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(105, 105, 105))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel3))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblcontactinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtaddress)
-                                                    .addComponent(txtname))
-                                                .addGap(138, 138, 138)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(105, 105, 105))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(31, 31, 31)
-                                                        .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(42, 42, 42)))))))))
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(103, 103, 103)
-                                .addComponent(lbllocation, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(163, 163, 163)
-                                .addComponent(lbltitle)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(txtdate, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(42, 42, 42)))))))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,12 +521,7 @@ public final class Sales_Table extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbltitle)
-                        .addGap(11, 11, 11)
-                        .addComponent(lbllocation, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblcontactinfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -779,24 +754,61 @@ public final class Sales_Table extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnameActionPerformed
 
     private void btnconfirmsaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfirmsaleActionPerformed
-        String path ="";
-        JFileChooser jchooser = new JFileChooser();
-        jchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int x = jchooser.showSaveDialog(this);
-        if(x== JFileChooser.APPROVE_OPTION){
-            path = jchooser.getSelectedFile().getPath();
 
-        }
-        Document document = new Document();
+  // step 1
+        Document document = new Document(PageSize.A5.rotate());
         try {
-            PdfWriter.getInstance(document,new FileOutputStream(path + "reciept.pdf"));
-            document.open();
-            PdfPTable ptable = new PdfPTable(4);
+            PdfWriter.getInstance(document, new FileOutputStream(RESULT));
+        } catch (FileNotFoundException | DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // step 3
+        //opening  the document
+        document.open();
+        Paragraph heading = new Paragraph("M & J MULTIPURPOSE ENTERPRISES LTD"
+                + "\nPurse Street Opposite Lorry Park, PO.Box 229, Arua Park"
+                + "\nTel:0771172559/ 0706629737 Email: woolardsamuesl@gmail.com\n"
+                + "INVOICE                                                  RECEIPT",
+                new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD));
+        heading.setAlignment(Element.ALIGN_CENTER);
+        try {
+            document.add(heading);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            document.add(new Paragraph(" "));
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+//            float col = 280f;
+//            float columnWidth[] = {col, col};
+//            PdfPTable tables = new PdfPTable(columnWidth);
+//        try{
+//        //   PdfPTable ptable = new PdfPTable(4);
+//            //adding header
+//            tables.addCell("INVOICE");
+//            tables.addCell("RECIEPT");
+//
+//       
+//            document.add(tables);
+//         } catch (DocumentException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+        
+        
+        
+        // step 4
+        PdfPTable table = new PdfPTable(4);
+        try{
+        //   PdfPTable ptable = new PdfPTable(4);
             //adding header
-            ptable.addCell("Quantity");
-            ptable.addCell("Product");
-            ptable.addCell("Rate");
-            ptable.addCell("Amount");
+            table.addCell("Quantity");
+            table.addCell("Product");
+            table.addCell("Rate");
+            table.addCell("Amount");
 
             for(int i = 0; i<salestable.getRowCount(); i++){
                 String quantity = salestable.getValueAt(i, 0).toString();
@@ -804,18 +816,66 @@ public final class Sales_Table extends javax.swing.JFrame {
                 String rate = salestable.getValueAt(i, 2).toString();
                 String amount = salestable.getValueAt(i, 3).toString();
 
-                ptable.addCell(quantity);
-                ptable.addCell(product);
-                ptable.addCell(rate);
-                ptable.addCell(amount);
-
+                table.addCell(quantity);
+                table.addCell(product);
+                table.addCell(rate);
+                table.addCell(amount);
             }
-            document.add(ptable);
-
-        } catch (FileNotFoundException | DocumentException ex) {
-            Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
+            document.add(table);
+         } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //opening the file
+        if(Desktop.isDesktopSupported()){
+        try{
+            File myfile = new File("reciept.pdf");
+            Desktop.getDesktop().open(myfile);
+        }catch(IOException ex){
+        }
+        // step 5
         document.close();
+        }  
+
+
+
+
+//        String path ="";
+//        JFileChooser jchooser = new JFileChooser();
+//        jchooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        int x = jchooser.showSaveDialog(this);
+//        if(x== JFileChooser.APPROVE_OPTION){
+//            path = jchooser.getSelectedFile().getPath();
+//
+//        }
+//        Document document = new Document();
+//        try {
+//            PdfWriter.getInstance(document,new FileOutputStream(path + "reciept.pdf"));
+//            document.open();
+//            PdfPTable ptable = new PdfPTable(4);
+//            //adding header
+//            ptable.addCell("Quantity");
+//            ptable.addCell("Product");
+//            ptable.addCell("Rate");
+//            ptable.addCell("Amount");
+//
+//            for(int i = 0; i<salestable.getRowCount(); i++){
+//                String quantity = salestable.getValueAt(i, 0).toString();
+//                String product = salestable.getValueAt(i, 1).toString();
+//                String rate = salestable.getValueAt(i, 2).toString();
+//                String amount = salestable.getValueAt(i, 3).toString();
+//
+//                ptable.addCell(quantity);
+//                ptable.addCell(product);
+//                ptable.addCell(rate);
+//                ptable.addCell(amount);
+//
+//            }
+//            document.add(ptable);
+//
+//        } catch (FileNotFoundException | DocumentException ex) {
+//            Logger.getLogger(Sales_Table.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        document.close();
     }//GEN-LAST:event_btnconfirmsaleActionPerformed
 
     /**
@@ -872,12 +932,9 @@ public final class Sales_Table extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbladdress;
-    private javax.swing.JLabel lblcontactinfo;
     private javax.swing.JLabel lbldate;
-    private javax.swing.JLabel lbllocation;
     private javax.swing.JLabel lblprice;
     private javax.swing.JLabel lblproduct;
-    private javax.swing.JLabel lbltitle;
     private javax.swing.JLabel lbltotal;
     private javax.swing.JLabel namelbl;
     private javax.swing.JLabel quantitylbl;
